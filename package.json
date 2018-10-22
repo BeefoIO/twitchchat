@@ -1,0 +1,17 @@
+{
+  "name": "twitchchat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "service.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.beefo.io/scm/pub/twitch_chat.git"
+  },
+  "author": "Beefo",
+  "license": "ISC",
+  "dependencies": {
+    "tmi.js": "^1.2.1"
+  }
+}
