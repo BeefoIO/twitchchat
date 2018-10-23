@@ -1,6 +1,5 @@
 var tmi = require('tmi.js');
-var channelJoinMessages = ['#Nordie', '#BoostFuze'];
-var channelSubMessages = ['#Shlorox', '#Nordie', '#syrinxx1337', '#Tinkerleo', '#JadiTV', '#BoostFuze'];
+var channelSubMessages = ['#BoostFuze'];
 
 // Functions
 function sleep(ms) {
@@ -19,10 +18,10 @@ var options = {
         reconnect: true
     },*/
     identity: {
-        username: "BoostFuze",
-        password: "oauth:zaw46x9rsm3hqmtrw12210x9nq0oo2"
+        username: "", //Your twitch Username e.g. JohnDoe
+        password: "" //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
     },
-    channels: [/*'#Trilluxe', '#Shlorox', '#JadiTV',*/ '#syrinxx1337', /*'#Tinkerleo',*/ '#Nordie', '#BoostFuze']
+    channels: ['#syrinxx1337', '#BoostFuze']
 };
 
 var client = new tmi.client(options);
@@ -33,22 +32,11 @@ client.connect().catch(err => {
 });
 
 // Events
-// Join Event
-/*client.on("join", async function (channel, username, self) {
-    if(channelJoinMessages.includes(channel) && !self){
-        console.log('join event triggered');
-        await sleep(5000);
-        client.say(channel, "syrinxxHi " + username + " syrinxxBlau").catch(err => {
-            console.log(err);
-        });
-    }
-});*/
-
 // Resub Event
 client.on("resub", function (channel, username, months, message, userstate, methods) {
     if(channelSubMessages.includes(channel) && username.toLowerCase() !== options.identity.username.toLowerCase()){
         console.log('resub event triggered');
-        client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " x" + months + "  syrinxxSub bibaSub syrinxxSub ").catch(err => {
+        client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " x" + months + "  syrinxxSub bibaSub syrinxxSub "/* your resub message*/).catch(err => {
             console.log(err);
         });
     }
@@ -58,7 +46,7 @@ client.on("resub", function (channel, username, months, message, userstate, meth
 client.on("subscription", function (channel, username, method, message, userstate) {
     if(channelSubMessages.includes(channel) && username.toLowerCase() !== options.identity.username.toLowerCase()){
         console.log('sub event triggered');
-        client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " syrinxxSub bibaSub syrinxxSub ").catch(err => {
+        client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " syrinxxSub bibaSub syrinxxSub "/* your sub message*/).catch(err => {
             console.log(err);
         });
     }
