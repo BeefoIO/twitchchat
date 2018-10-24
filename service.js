@@ -1,4 +1,4 @@
-var tmi = require('tmi.js');
+var tmi = require('./tmi.js/index');
 var channelJoinMessages = ['#BoostFuze'];
 var channelSubMessages = ['#BoostFuze', '#syrinxx1337', '#bibaboy'];
 var saidHelloTo = [];
