@@ -616,7 +616,7 @@ client.prototype.handleMessage = function handleMessage(message) {
                         });
                         var userstate = message.tags;
 
-                        this.emit("subgift", channel, username, {plan, planName}, userstate);
+                        this.emit("subgift", channel, username, recipient, {plan, planName}, userstate);
                     }
                     break;
 
