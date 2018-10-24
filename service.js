@@ -16,12 +16,94 @@ channelSubMessages.forEach(channel => {
     channelSubMessages.push(channel.toLocaleLowerCase());
 })
 
-awaitLoginToken().then(sol => {
-    console.log(sol);
+awaitLoginToken().then(token => {
+    // auth stuff
+    var options = {
+        options: {
+            debug: true
+        },
+        /*connection: {
+            server: 'irc.chat.twitch.tv',
+            port: 6667,
+            secure: false,
+            reconnect: true
+        },*/
+        identity: {
+            username: "BoostFuze", //Your twitch Username e.g. JohnDoe
+            password: "oauth:" + token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
+        },
+        channels: ['#syrinxx1337', '#BoostFuze', '#bibaboy']
+    };
+
+    var client = new tmi.client(options);
+
+    client.connect().catch(err => {
+        console.log(err);
+    });
+
+    // Events
+    // Chat Event
+    client.on("chat", function (channel, userstate, message, self) {
+        if (self) return;
+        var username = userstate.username;
+        
+        if(channelJoinMessages.includes(channel) && !saidHelloTo.includes(username) && message.toLowerCase().includes(options.identity.username.toLowerCase())) {
+            console.log(saidHelloTo);
+            client.say(channel, "syrinxxHi " + username + " syrinxxBlau"/* your hello message*/).catch(err => {
+                console.log(err);
+            });
+            saidHelloTo.push(username);
+        }
+    });
+
+    // Resub Event
+    client.on("resub", function (channel, username, months, message, userstate, methods) {
+        if(channelSubMessages.includes(channel) && username.toLowerCase() !== options.identity.username.toLowerCase()){
+            console.log('resub event triggered');
+            client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " x" + months + "  syrinxxSub bibaSub syrinxxSub "/* your resub message*/).catch(err => {
+                console.log(err);
+            });
+        }
+    });
+
+    // Sub Event
+    client.on("subscription", function (channel, username, method, message, userstate) {
+        if(channelSubMessages.includes(channel) && username.toLowerCase() !== options.identity.username.toLowerCase()){
+            console.log('sub event triggered');
+            client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " syrinxxSub bibaSub syrinxxSub "/* your sub message*/).catch(err => {
+                console.log(err);
+            });
+        }
+    });
+
+    // SubGift Event
+    client.on("subgift", function (channel, username, recipient, method, userstate) {
+        if(channelSubMessages.includes(channel)){
+            if(username.toLowerCase() !== options.identity.username.toLowerCase()){
+                console.log('subgift event triggered');
+                console.log(recipient);
+                client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " to " + recipient + " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
+                    console.log(err);
+                });
+            }else{
+                console.log('subgift event triggered');
+                client.say(channel, " syrinxxGift bibaGift syrinxxGift Danke @" + username +  " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
+                    console.log(err);
+                });
+            }
+        }
+    });
+
+    // Cheer Event
+    /*client.on("cheer", function (channel, userstate, message) {
+        client.say("#BoostFuze", "");
+    });*/
+
+    console.log(token);
 });
 
 // auth stuff
-var options = {
+/*var options = {
     options: {
         debug: true
     },
@@ -30,7 +112,7 @@ var options = {
         port: 6667,
         secure: false,
         reconnect: true
-    },*/
+    },*//*
     identity: {
         username: "BoostFuze", //Your twitch Username e.g. JohnDoe
         password: "oauth:zz54u7fqai8h63no0hjnjrbrusut2s" //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
@@ -43,7 +125,7 @@ var client = new tmi.client(options);
 // Connect the client to the server..
 client.connect().catch(err => {
     console.log(err);
-});
+});*/
 
 // Functions
 // Function awaitLoginToken
@@ -51,14 +133,12 @@ function awaitLoginToken(username, password) {
     return new Promise(function(resolve, reject) {
         console.log('Login here: https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=e5vslppz77s8hjizhxuzjcc8i4uyle&redirect_uri=http://localhost:6077/auth.html&scope=chat:read+chat:edit+channel:moderate+chat_login');
         var server = app.listen(port, function () {
-            console.log("awaiting answer at http://localhost:" + port + "/callback/twitch/" + shutdownToken + "/:token");
+            console.log("awaiting answer at http://localhost:" + port + "/callback/twitch/:token");
         });
-        app.get('/callback/raw', function(req, res){
-
-        });
-        app.get('/callback/twitch/' + shutdownToken + '/:token', function(req, res){
+        app.get('/callback/twitch/:token', function(req, res){
+            res.send('Authorized');
             server.close();
-            resolve('server closed');
+            resolve(req.params.token);
         });
     });
 }
@@ -75,13 +155,13 @@ function makeId(length = 16, chars = "abcdefghijklmnopqrstuvwxyz0123456789") {
 
 // Events
 // Chat Event
-client.on("chat", function (channel, userstate, message, self) {
+/*client.on("chat", function (channel, userstate, message, self) {
     if (self) return;
     var username = userstate.username;
     
     if(channelJoinMessages.includes(channel) && !saidHelloTo.includes(username) && message.toLowerCase().includes(options.identity.username.toLowerCase())) {
         console.log(saidHelloTo);
-        client.say(channel, "syrinxxHi " + username + " syrinxxBlau"/* your hello message*/).catch(err => {
+        client.say(channel, "syrinxxHi " + username + " syrinxxBlau"/* your hello message*//*).catch(err => {
             console.log(err);
         });
         saidHelloTo.push(username);
@@ -92,7 +172,7 @@ client.on("chat", function (channel, userstate, message, self) {
 client.on("resub", function (channel, username, months, message, userstate, methods) {
     if(channelSubMessages.includes(channel) && username.toLowerCase() !== options.identity.username.toLowerCase()){
         console.log('resub event triggered');
-        client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " x" + months + "  syrinxxSub bibaSub syrinxxSub "/* your resub message*/).catch(err => {
+        client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " x" + months + "  syrinxxSub bibaSub syrinxxSub "/* your resub message*//*).catch(err => {
             console.log(err);
         });
     }
@@ -102,7 +182,7 @@ client.on("resub", function (channel, username, months, message, userstate, meth
 client.on("subscription", function (channel, username, method, message, userstate) {
     if(channelSubMessages.includes(channel) && username.toLowerCase() !== options.identity.username.toLowerCase()){
         console.log('sub event triggered');
-        client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " syrinxxSub bibaSub syrinxxSub "/* your sub message*/).catch(err => {
+        client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " syrinxxSub bibaSub syrinxxSub "/* your sub message*//*).catch(err => {
             console.log(err);
         });
     }
@@ -114,17 +194,17 @@ client.on("subgift", function (channel, username, recipient, method, userstate) 
         if(username.toLowerCase() !== options.identity.username.toLowerCase()){
             console.log('subgift event triggered');
             console.log(recipient);
-            client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " to " + recipient.username + " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
+            client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " to " + recipient.username + " syrinxxGift bibaGift syrinxxGift "/* your subgift message*//*).catch(err => {
                 console.log(err);
             });
         }else{
             console.log('subgift event triggered');
-            client.say(channel, " syrinxxGift bibaGift syrinxxGift Danke @" + username +  " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
+            client.say(channel, " syrinxxGift bibaGift syrinxxGift Danke @" + username +  " syrinxxGift bibaGift syrinxxGift "/* your subgift message*//*).catch(err => {
                 console.log(err);
             });
         }
     }
-});
+});*/
 
 // Cheer Event
 /*client.on("cheer", function (channel, userstate, message) {

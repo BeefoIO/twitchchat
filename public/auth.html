@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>AutoChat | Auth redirect</title>
     <script type="text/javascript">
-    console.log(location.hash.substr(14, 44));
+    window.location.replace('http://localhost:6077/callback/twitch/' + location.hash.substr(14, 30));
     </script>
 </head>
 <body>
