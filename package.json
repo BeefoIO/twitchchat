@@ -4,6 +4,7 @@
   "description": "",
   "main": "service.js",
   "scripts": {
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -12,6 +13,8 @@
   "author": "Beefo",
   "license": "ISC",
   "dependencies": {
+    "electron": "^3.0.5",
+    "express": "^4.16.4",
     "tmi.js": "^1.2.1"
   }
 }
