@@ -2,12 +2,28 @@ var tmi = require('./tmi.js/index');
 var channelJoinMessages = ['#BoostFuze'];
 var channelSubMessages = ['#BoostFuze', '#syrinxx1337', '#bibaboy'];
 var saidHelloTo = [];
+var express = require('express');
+var app = express();
+app.use(express.static('public'));
 var port = 6077;
+var shutdownToken = makeId();
+
+// every channel to lowercase
+channelJoinMessages.forEach(channel => {
+    channelJoinMessages.push(channel.toLocaleLowerCase());
+});
+channelSubMessages.forEach(channel => {
+    channelSubMessages.push(channel.toLocaleLowerCase());
+})
+
+awaitLoginToken().then(sol => {
+    console.log(sol);
+});
 
 // auth stuff
 var options = {
     options: {
-        //debug: true
+        debug: true
     },
     /*connection: {
         server: 'irc.chat.twitch.tv',
@@ -16,8 +32,8 @@ var options = {
         reconnect: true
     },*/
     identity: {
-        username: "", //Your twitch Username e.g. JohnDoe
-        password: "" //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
+        username: "BoostFuze", //Your twitch Username e.g. JohnDoe
+        password: "oauth:zz54u7fqai8h63no0hjnjrbrusut2s" //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
     },
     channels: ['#syrinxx1337', '#BoostFuze', '#bibaboy']
 };
@@ -29,13 +45,41 @@ client.connect().catch(err => {
     console.log(err);
 });
 
+// Functions
+// Function awaitLoginToken
+function awaitLoginToken(username, password) {
+    return new Promise(function(resolve, reject) {
+        console.log('Login here: https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=e5vslppz77s8hjizhxuzjcc8i4uyle&redirect_uri=http://localhost:6077/auth.html&scope=chat:read+chat:edit+channel:moderate+chat_login');
+        var server = app.listen(port, function () {
+            console.log("awaiting answer at http://localhost:" + port + "/callback/twitch/" + shutdownToken + "/:token");
+        });
+        app.get('/callback/raw', function(req, res){
+
+        });
+        app.get('/callback/twitch/' + shutdownToken + '/:token', function(req, res){
+            server.close();
+            resolve('server closed');
+        });
+    });
+}
+
+// Function makeId
+function makeId(length = 16, chars = "abcdefghijklmnopqrstuvwxyz0123456789") {
+    var text = "";
+
+    for (var i = 0; i < length; i++)
+        text += chars.charAt(Math.floor(Math.random() * chars.length));
+
+    return text;
+}
+
 // Events
 // Chat Event
 client.on("chat", function (channel, userstate, message, self) {
     if (self) return;
     var username = userstate.username;
     
-    if(channelJoinMessages.includes(channel) && !saidHelloTo.includes(username) && message.toLowerCase().includes(username.toLowerCase())) {
+    if(channelJoinMessages.includes(channel) && !saidHelloTo.includes(username) && message.toLowerCase().includes(options.identity.username.toLowerCase())) {
         console.log(saidHelloTo);
         client.say(channel, "syrinxxHi " + username + " syrinxxBlau"/* your hello message*/).catch(err => {
             console.log(err);
@@ -75,7 +119,7 @@ client.on("subgift", function (channel, username, recipient, method, userstate) 
             });
         }else{
             console.log('subgift event triggered');
-            client.say(channel, "Danke @" + username + " syrinxxGift bibaGift syrinxxGift syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
+            client.say(channel, " syrinxxGift bibaGift syrinxxGift Danke @" + username +  " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
                 console.log(err);
             });
         }
