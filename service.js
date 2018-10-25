@@ -6,7 +6,6 @@ var express = require('express');
 var app = express();
 app.use(express.static('public'));
 var port = 6077;
-var shutdownToken = makeId();
 
 // every channel to lowercase
 channelJoinMessages.forEach(channel => {
