@@ -1,0 +1,19 @@
+{
+    "submessage": "",
+    "resubmessage": "",
+    "subgiftmessage": "",
+    "joinmessage": "",
+    "channels": [
+        "#BoostFuze",
+        "#syrinxx1337",
+        "#bibaboy"
+    ],
+    "channelJoinMessages": [
+        "#BoostFuze"
+    ],
+    "channelSubMessages": [
+        "#BoostFuze",
+        "#syrinxx1337",
+        "#bibaboy"
+    ],
+}

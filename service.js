@@ -19,7 +19,7 @@ awaitLoginToken().then(function (token, username){
     // auth stuff
     var options = {
         options: {
-            //debug: true
+            debug: true
         },
         connection: {
             server: 'irc-ws.chat.twitch.tv',
@@ -36,7 +36,9 @@ awaitLoginToken().then(function (token, username){
 
     var client = new tmi.client(options);
 
-    client.connect().catch(err => {
+    client.connect().then(idk => {
+        console.log('Authenticated successfully');
+    }).catch(err => {
         console.log(err);
     });
 
@@ -78,13 +80,12 @@ awaitLoginToken().then(function (token, username){
     // SubGift Event
     client.on("subgift", function (channel, username, recipient, method, userstate) {
         if(channelSubMessages.includes(channel)){
+            console.log('subgift event triggered');
             if(username.toLowerCase() !== options.identity.username.toLowerCase()){
-                console.log('subgift event triggered');
                 client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " to " + recipient + " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
                     console.log(err);
                 });
             }else{
-                console.log('subgift event triggered');
                 client.say(channel, " syrinxxGift bibaGift syrinxxGift Danke @" + username +  " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
                     console.log(err);
                 });
@@ -102,13 +103,13 @@ awaitLoginToken().then(function (token, username){
 // Function awaitLoginToken
 function awaitLoginToken(username, password) {
     return new Promise(function(resolve, reject) {
-        console.log('Login here: http://localhost:' + port + '/auth.html');
         var server = app.listen(port, function () {
             console.log('WebServer started for auth');
+            console.log('Login here: http://localhost:' + port + '/auth.html');
         });
         app.post('/callback/twitch/:token', function(req, res){
-            server.close();
             res.send('Authorized');
+            server.close();
             resolve(req.params.token, req.param.username);
         });
     });
