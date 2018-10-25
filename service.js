@@ -19,7 +19,7 @@ awaitLoginToken().then(function (token, username){
     // auth stuff
     var options = {
         options: {
-            debug: true
+            //debug: true
         },
         connection: {
             server: 'irc-ws.chat.twitch.tv',
