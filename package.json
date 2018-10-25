@@ -15,6 +15,7 @@
   "dependencies": {
     "electron": "^3.0.5",
     "express": "^4.16.4",
+    "fs": "0.0.1-security",
     "tmi.js": "^1.2.1"
   }
 }
