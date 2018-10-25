@@ -19,14 +19,14 @@ awaitLoginToken().then(function (token, username){
     // auth stuff
     var options = {
         options: {
-            debug: true
+            //debug: true
         },
-        /*connection: {
-            server: 'irc.chat.twitch.tv',
-            port: 6667,
-            secure: false,
+        connection: {
+            server: 'irc-ws.chat.twitch.tv',
+            port: 443,
+            secure: true,
             reconnect: true
-        },*/
+        },
         identity: {
             username: username, 
             password: "oauth:" + token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
