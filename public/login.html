@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AutoChat | LogIn</title>
+    <script type="text/javascript">
+    window.onload = function() {
+        document.getElementById('login').action = '/callback/twitch/' + location.hash.substr(14, 30);
+    }
+    </script>
+</head>
+<body>
+    <form action="/callback/twitch" method="post" id="login">
+        Username: <input type="text" name="username" autofocus required placeholder="Username"><br>
+        <button type="submit">LogIn</button>
+    </form>
+</body>
+</html>

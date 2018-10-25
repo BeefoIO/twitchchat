@@ -16,7 +16,7 @@ channelSubMessages.forEach(channel => {
     channelSubMessages.push(channel.toLocaleLowerCase());
 })
 
-awaitLoginToken().then(token => {
+awaitLoginToken().then(function (token, username){
     // auth stuff
     var options = {
         options: {
@@ -29,7 +29,7 @@ awaitLoginToken().then(token => {
             reconnect: true
         },*/
         identity: {
-            username: "BoostFuze", //Your twitch Username e.g. JohnDoe
+            username: username, //Your twitch Username e.g. JohnDoe
             password: "oauth:" + token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
         },
         channels: ['#syrinxx1337', '#BoostFuze', '#bibaboy']
@@ -98,8 +98,6 @@ awaitLoginToken().then(token => {
     /*client.on("cheer", function (channel, userstate, message) {
         client.say("#BoostFuze", "");
     });*/
-
-    console.log(token);
 });
 
 // auth stuff
@@ -131,14 +129,14 @@ client.connect().catch(err => {
 // Function awaitLoginToken
 function awaitLoginToken(username, password) {
     return new Promise(function(resolve, reject) {
-        console.log('Login here: https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=e5vslppz77s8hjizhxuzjcc8i4uyle&redirect_uri=http://localhost:6077/auth.html&scope=chat:read+chat:edit+channel:moderate+chat_login');
+        console.log('Login here: http://localhost:' + port + '/auth.html');
         var server = app.listen(port, function () {
-            console.log("awaiting answer at http://localhost:" + port + "/callback/twitch/:token");
+            console.log('WebServer started for auth');
         });
-        app.get('/callback/twitch/:token', function(req, res){
-            res.send('Authorized');
+        app.post('/callback/twitch/:token', function(req, res){
             server.close();
-            resolve(req.params.token);
+            res.send('Authorized');
+            resolve(req.params.token, req.param.username);
         });
     });
 }
