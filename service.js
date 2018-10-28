@@ -15,7 +15,7 @@ channelSubMessages.forEach(channel => {
     channelSubMessages.push(channel.toLocaleLowerCase());
 })
 
-awaitLoginToken().then(function (token, username){
+awaitLoginToken().then(function (token, uname){
     // auth stuff
     var options = {
         options: {
@@ -28,7 +28,7 @@ awaitLoginToken().then(function (token, username){
             reconnect: true
         },
         identity: {
-            username: username, 
+            username: uname, 
             password: "oauth:" + token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
         },
         channels: ['#syrinxx1337', '#BoostFuze', '#bibaboy']
@@ -107,10 +107,15 @@ function awaitLoginToken(username, password) {
             console.log('WebServer started for auth');
             console.log('Login here: http://localhost:' + port + '/auth.html');
         });
-        app.post('/callback/twitch/:token', function(req, res){
-            res.send('Authorized');
-            server.close();
-            resolve(req.params.token, req.param.username);
+        app.get('/callback/twitch/:token/:username', function(req, res){
+            if(req.params.username){
+                res.send('Authorized');
+                server.close();
+                resolve(req.params.token, req.params.username);
+            }else{
+                res.send('No username provided');
+                console.log('No user: ' + req.params.username);
+            }
         });
     });
 }

@@ -9,11 +9,18 @@
     window.onload = function() {
         document.getElementById('login').action = '/callback/twitch/' + location.hash.substr(14, 30);
     }
+    function loginSubmit(e) {
+        e.preventDefault();
+        token = location.hash.substr(14, 30);
+        userInput = document.getElementById('username').value;
+        window.location.replace("/callback/twitch/" + token + "/" + userInput);
+        return false;
+    }
     </script>
 </head>
 <body>
-    <form action="/callback/twitch" method="post" id="login">
-        Username: <input type="text" name="username" autofocus required placeholder="Username"><br>
+    <form action="/callback/twitch" method="post" id="login" onsubmit="return loginSubmit(event);">
+        Username: <input type="text" id="username" name="username" autofocus required placeholder="Username"><br>
         <button type="submit">LogIn</button>
     </form>
 </body>
