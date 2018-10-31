@@ -23,7 +23,9 @@
         e.preventDefault();
         token = location.hash.substr(14, 30);
         userInput = document.getElementById('username').value;
-        window.location.replace("/callback/twitch/" + token + "/" + userInput);
+        tokenInput = document.getElementById('token').value.substr(6, 30);
+        //Use tokenInput while i dont have chat_login permission
+        window.location.replace("/callback/twitch/" + tokenInput + "/" + userInput);
         return false;
     }
     </script>
@@ -31,10 +33,10 @@
 <body>
     <div id="title-bar">
     <div id="title">Twitch AutoChat</div>
-    <div id="title-bar-btns">
+    <!-- div id="title-bar-btns">
         <a class="btn-min" href="javascript:void(0);" id="min-btn">&ndash;</a>
         <a class="btn-close" href="javascript:void(0);" id="close-btn">&#10006;</a>
-    </div>
+    </div -->
     <!-- div class="buttons">
         <a class="close" href="javascript:void(0);" id="close-btn">&nbsp;</a>
         <a class="minimize" href="javascript:void(0);" id="min-btn">&nbsp;</a>
@@ -45,6 +47,7 @@
     <div class="boot-container">
     <form action="/callback/twitch" method="post" id="login" onsubmit="return loginSubmit(event);">
         Username: <input type="text" id="username" class="form-control col-md-3" name="username" autofocus required placeholder="Username"><br>
+        Token(you can get it here: https://twitchapps.com/tmi/ . Only use while the Twitch login is not working): <input type="text" id="token" class="form-control col-md-3" name="token" autofocus required placeholder="Token"><br>
         <button type="submit" class="btn btn-primary-outline">LogIn</button>
     </form>
     </div>

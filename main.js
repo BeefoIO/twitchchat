@@ -47,7 +47,7 @@ ipcMain.on('settings:send', function(e){
 
 function createMainWindow() {
   let mainWindow;
-  mainWindow = new BrowserWindow({frame: false, show: false});
+  mainWindow = new BrowserWindow({frame: true, show: false});
   mainWindow.loadURL(url.format({
     pathname: /*path.join(__dirname, 'gui/lo.html')*/ 'localhost:6077/auth.html',
     protocol: 'http:',
