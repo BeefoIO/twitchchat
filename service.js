@@ -6,27 +6,9 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 var assets = express();
+
 app.use(express.static('public'));
-assets.use('/', express.static('assets'));
-assets.use('/', function(req, res, next) {
-
-    /**
-     * Headers
-     */
-    res.header("Access-Control-Allow-Origin",  "*");
-    
-    next();
-
-
-});
-/*assets.use(function (req, res, next) {
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
-
-    // Pass to next layer of middleware
-    next();
-});*/
+assets.use(express.static('assets'));
 app.set('view engine', 'ejs')
 app.set('views', './views');
 var port = 6077;
@@ -132,7 +114,10 @@ awaitLoginToken().then(function (loginData){
 });
 
 // Functions
-// Function awaitLoginToken
+/*
+ * Function awaitLoginToken
+ * @return object
+ */
 function awaitLoginToken(username, password) {
     return new Promise(function(resolve, reject) {
         var server = app.listen(port, function () {
@@ -140,16 +125,15 @@ function awaitLoginToken(username, password) {
             console.log('Login here: http://localhost:' + port + '/auth.html');
         });
         app.get('/callback/twitch/:token/:username', function(req, res){
-            if(req.params.username){
+            if(req.params.username && req.params.token){
                 res.render('authorized');
-                //server.close();
+                server.close();
                 resolve({
                     username: req.params.username,
                     token: req.params.token
                 });
             }else{
-                res.send('No username provided');
-                console.log('No user: ' + req.params.username);
+                res.render('no_user');
             }
         });
     });

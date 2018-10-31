@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+    <link rel="stylesheet" href="http://localhost:6078/css/w3.css">
+    <link rel="stylesheet" href="http://localhost:6078/css/fonts.css">
+    <link rel="stylesheet" href="http://localhost:6078/css/custom.css">
+    <link rel="stylesheet" href="http://localhost:6078/css/main.css">
+    <link rel="stylesheet" href="http://localhost:6078/css/sidebar.css">
+    <link rel="stylesheet" href="http://localhost:6078/css/titlebar.css">
+    <script src="http://localhost:6078/js/jquery.min.js"></script>
+    <title>AutoChat :: Authorize failed</title>
+</head>
+<body>
+    <div id="title-bar">
+    <div id="title">Twitch AutoChat</div>
+    <div id="title-bar-btns">
+        <a class="btn-min" href="javascript:void(0);" id="min-btn">&ndash;</a>
+        <a class="btn-close" href="javascript:void(0);" id="close-btn">&#10006;</a>
+    </div>
+    <!-- div class="buttons">
+        <a class="close" href="javascript:void(0);" id="close-btn">&nbsp;</a>
+        <a class="minimize" href="javascript:void(0);" id="min-btn">&nbsp;</a>
+    </div -->
+    </div>
+    <div class="boot-sidebar boot-bar-block boot-card boot-animate-left" id="bootSidebar" style="width:47px; display: none;"> 
+    <button onclick="boot_close()" id="close-sidebar" class="boot-bar-item" title="Close"><span class="boot-item-text">&times;</span></button>
+    <a href="http://localhost:6077/index.html" class="boot-bar-item boot-button boot-active" onclick="return false;" title="Home"><i class="fa fa-home boot-logo-color boot-item-text"></i></a>
+    <a href="http://localhost:6077/settings.html" class="boot-bar-item boot-button" title="Settings"><i class="fa fa-cogs boot-logo-color boot-item-text"></i></a>
+    <a href="#" class="boot-bar-item boot-button boot-item-bottom" id="boostfuzeLink"><img class="boot-bar-img" src="http://localhost:6078/img/logo.png" width="25"></img></a>
+    </div>
+    
+    <div class="boot-main" id="main">
+    
+    <div class="boot-teal">
+        <button id="bootOpenNav" class="boot-button boot-teal boot-xlarge" onclick="boot_open()">&#9776;</button><div class="sidebar-collapse" id="boot-collapse" style="display: none;"></div>
+    </div>
+    <div class="boot-container">
+    No Username or Token provided
+    </div>
+    </div>
+    <script src="http://localhost:6078/js/jquery.min.js"></script>
+    <script src="http://localhost:6078/js/main.js"></script>
+    <script src="http://localhost:6078/js/sidebar.js"></script>
+    <script src="http://localhost:6078/js/titlebar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
