@@ -1,0 +1,231 @@
+/* boot.CSS 4.10 February 2018 by Jan Egil and Borge Refsnes */
+html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+/* Extract from normalize.css by Nicolas Gallagher and Jonathan Neal git.io/normalize */
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}
+audio,canvas,progress,video{display:inline-block}progress{vertical-align:baseline}
+audio:not([controls]){display:none;height:0}[hidden],template{display:none}
+a{background-color:transparent;-webkit-text-decoration-skip:objects}
+a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}
+dfn{font-style:italic}mark{background:#ff0;color:#000}
+small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sub{bottom:-0.25em}sup{top:-0.5em}figure{margin:1em 40px}img{border-style:none}svg:not(:root){overflow:hidden}
+code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}hr{box-sizing:content-box;height:0;overflow:visible}
+button,input,select,textarea{font:inherit;margin:0}optgroup{font-weight:bold}
+button,input{overflow:visible}button,select{text-transform:none}
+button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button}
+button::-moz-focus-inner, [type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner{border-style:none;padding:0}
+button:-moz-focusring, [type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring{outline:1px dotted ButtonText}
+fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}
+legend{color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}
+[type=checkbox],[type=radio]{padding:0}
+[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}
+[type=search]{-webkit-appearance:textfield;outline-offset:-2px}
+[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}
+::-webkit-input-placeholder{color:inherit;opacity:0.54}
+::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}
+/* End extract */
+html,body{font-family:Verdana,sans-serif;font-size:15px;line-height:1.5}html{overflow-x:hidden}
+h1{font-size:36px}h2{font-size:30px}h3{font-size:24px}h4{font-size:20px}h5{font-size:18px}h6{font-size:16px}.boot-serif{font-family:serif}
+h1,h2,h3,h4,h5,h6{font-family:"Segoe UI",Arial,sans-serif;font-weight:400;margin:10px 0}.boot-wide{letter-spacing:4px}
+hr{border:0;border-top:1px solid #eee;margin:20px 0}
+.boot-image{max-width:100%;height:auto}img{vertical-align:middle}a{color:inherit}
+.boot-table,.boot-table-all{border-collapse:collapse;border-spacing:0;width:100%;display:table}.boot-table-all{border:1px solid #ccc}
+.boot-bordered tr,.boot-table-all tr{border-bottom:1px solid #ddd}.boot-striped tbody tr:nth-child(even){background-color:#f1f1f1}
+.boot-table-all tr:nth-child(odd){background-color:#fff}.boot-table-all tr:nth-child(even){background-color:#f1f1f1}
+.boot-hoverable tbody tr:hover,.boot-ul.boot-hoverable li:hover{background-color:#ccc}.boot-centered tr th,.boot-centered tr td{text-align:center}
+.boot-table td,.boot-table th,.boot-table-all td,.boot-table-all th{padding:8px 8px;display:table-cell;text-align:left;vertical-align:top}
+.boot-table th:first-child,.boot-table td:first-child,.boot-table-all th:first-child,.boot-table-all td:first-child{padding-left:16px}
+.boot-btn,.boot-button{border:none;display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
+.boot-btn:hover{box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)}
+.boot-btn,.boot-button{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}   
+.boot-disabled,.boot-btn:disabled,.boot-button:disabled{cursor:not-allowed;opacity:0.3}.boot-disabled *,:disabled *{pointer-events:none}
+.boot-btn.boot-disabled:hover,.boot-btn:disabled:hover{box-shadow:none}
+.boot-badge,.boot-tag{background-color:#000;color:#fff;display:inline-block;padding-left:8px;padding-right:8px;text-align:center}.boot-badge{border-radius:50%}
+.boot-ul{list-style-type:none;padding:0;margin:0}.boot-ul li{padding:8px 16px;border-bottom:1px solid #ddd}.boot-ul li:last-child{border-bottom:none}
+.boot-tooltip,.boot-display-container{position:relative}.boot-tooltip .boot-text{display:none}.boot-tooltip:hover .boot-text{display:inline-block}
+.boot-ripple:active{opacity:0.5}.boot-ripple{transition:opacity 0s}
+.boot-input{padding:8px;display:block;border:none;border-bottom:1px solid #ccc;width:100%}
+.boot-select{padding:9px 0;width:100%;border:none;border-bottom:1px solid #ccc}
+.boot-dropdown-click,.boot-dropdown-hover{position:relative;display:inline-block;cursor:pointer}
+.boot-dropdown-hover:hover .boot-dropdown-content{display:block}
+.boot-dropdown-hover:first-child,.boot-dropdown-click:hover{background-color:#ccc;color:#000}
+.boot-dropdown-hover:hover > .boot-button:first-child,.boot-dropdown-click:hover > .boot-button:first-child{background-color:#ccc;color:#000}
+.boot-dropdown-content{cursor:auto;color:#000;background-color:#fff;display:none;position:absolute;min-width:160px;margin:0;padding:0;z-index:1}
+.boot-check,.boot-radio{width:24px;height:24px;position:relative;top:6px}
+.boot-sidebar{height:100%;width:200px;background-color:#fff;box-shadow: 1px;position:fixed!important;z-index:1;overflow:auto}
+.boot-bar-block .boot-dropdown-hover,.boot-bar-block .boot-dropdown-click{width:100%}
+.boot-bar-block .boot-dropdown-hover .boot-dropdown-content,.boot-bar-block .boot-dropdown-click .boot-dropdown-content{min-width:100%}
+.boot-bar-block .boot-dropdown-hover .boot-button,.boot-bar-block .boot-dropdown-click .boot-button{width:100%;text-align:left;padding:8px 16px}
+.boot-main,#main{transition:margin-left .4s}
+.boot-modal{z-index:3;display:none;padding-top:100px;position:fixed;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.4)}
+.boot-modal-content{margin:auto;background-color:#fff;position:relative;padding:0;outline:0;width:600px}
+.boot-bar{width:100%;overflow:hidden}.boot-center .boot-bar{display:inline-block;width:auto}
+.boot-bar .boot-bar-item{padding:8px 16px;float:left;width:auto;border:none;display:block;outline:0}
+.boot-bar .boot-dropdown-hover,.boot-bar .boot-dropdown-click{position:static;float:left}
+.boot-bar .boot-button{white-space:normal}
+.boot-bar-block .boot-bar-item{width:100%;display:block;padding:8px 16px;text-align:center;border:none;white-space:normal;float:none;outline:0}
+.boot-bar-block.boot-center .boot-bar-item{text-align:center}.boot-block{display:block;width:100%}
+.boot-responsive{display:block;overflow-x:auto}
+.boot-container:after,.boot-container:before,.boot-panel:after,.boot-panel:before,.boot-row:after,.boot-row:before,.boot-row-padding:after,.boot-row-padding:before,
+.boot-cell-row:before,.boot-cell-row:after,.boot-clear:after,.boot-clear:before,.boot-bar:before,.boot-bar:after{content:"";display:table;clear:both}
+.boot-col,.boot-half,.boot-third,.boot-twothird,.boot-threequarter,.boot-quarter{float:left;width:100%}
+.boot-col.s1{width:8.33333%}.boot-col.s2{width:16.66666%}.boot-col.s3{width:24.99999%}.boot-col.s4{width:33.33333%}
+.boot-col.s5{width:41.66666%}.boot-col.s6{width:49.99999%}.boot-col.s7{width:58.33333%}.boot-col.s8{width:66.66666%}
+.boot-col.s9{width:74.99999%}.boot-col.s10{width:83.33333%}.boot-col.s11{width:91.66666%}.boot-col.s12{width:99.99999%}
+@media (min-width:601px){.boot-col.m1{width:8.33333%}.boot-col.m2{width:16.66666%}.boot-col.m3,.boot-quarter{width:24.99999%}.boot-col.m4,.boot-third{width:33.33333%}
+.boot-col.m5{width:41.66666%}.boot-col.m6,.boot-half{width:49.99999%}.boot-col.m7{width:58.33333%}.boot-col.m8,.boot-twothird{width:66.66666%}
+.boot-col.m9,.boot-threequarter{width:74.99999%}.boot-col.m10{width:83.33333%}.boot-col.m11{width:91.66666%}.boot-col.m12{width:99.99999%}}
+@media (min-width:993px){.boot-col.l1{width:8.33333%}.boot-col.l2{width:16.66666%}.boot-col.l3{width:24.99999%}.boot-col.l4{width:33.33333%}
+.boot-col.l5{width:41.66666%}.boot-col.l6{width:49.99999%}.boot-col.l7{width:58.33333%}.boot-col.l8{width:66.66666%}
+.boot-col.l9{width:74.99999%}.boot-col.l10{width:83.33333%}.boot-col.l11{width:91.66666%}.boot-col.l12{width:99.99999%}}
+.boot-content{max-width:980px;margin:auto}.boot-rest{overflow:hidden}
+.boot-cell-row{display:table;width:100%}.boot-cell{display:table-cell}
+.boot-cell-top{vertical-align:top}.boot-cell-middle{vertical-align:middle}.boot-cell-bottom{vertical-align:bottom}
+.boot-hide{display:none!important}.boot-show-block,.boot-show{display:block!important}.boot-show-inline-block{display:inline-block!important}
+@media (max-width:600px){.boot-modal-content{margin:0 10px;width:auto!important}.boot-modal{padding-top:30px}
+.boot-dropdown-hover.boot-mobile .boot-dropdown-content,.boot-dropdown-click.boot-mobile .boot-dropdown-content{position:relative}	
+.boot-hide-small{display:none!important}.boot-mobile{display:block;width:100%!important}.boot-bar-item.boot-mobile,.boot-dropdown-hover.boot-mobile,.boot-dropdown-click.boot-mobile{text-align:center}
+.boot-dropdown-hover.boot-mobile,.boot-dropdown-hover.boot-mobile .boot-btn,.boot-dropdown-hover.boot-mobile .boot-button,.boot-dropdown-click.boot-mobile,.boot-dropdown-click.boot-mobile .boot-btn,.boot-dropdown-click.boot-mobile .boot-button{width:100%}}
+@media (max-width:768px){.boot-modal-content{width:500px}.boot-modal{padding-top:50px}}
+@media (min-width:993px){.boot-modal-content{width:900px}.boot-hide-large{display:none!important}.boot-sidebar.boot-collapse{display:block!important}}
+@media (max-width:992px) and (min-width:601px){.boot-hide-medium{display:none!important}}
+@media (max-width:992px){.boot-sidebar.boot-collapse{display:none}}
+.boot-top,.boot-bottom{position:fixed;width:100%;z-index:1}.boot-top{top:0}.boot-bottom{bottom:0}
+.boot-overlay{position:fixed;display:none;width:100%;height:100%;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.5);z-index:2}
+.boot-display-topleft{position:absolute;left:0;top:0}.boot-display-topright{position:absolute;right:0;top:0}
+.boot-display-bottomleft{position:absolute;left:0;bottom:0}.boot-display-bottomright{position:absolute;right:0;bottom:0}
+.boot-display-middle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
+.boot-display-left{position:absolute;top:50%;left:0%;transform:translate(0%,-50%);-ms-transform:translate(-0%,-50%)}
+.boot-display-right{position:absolute;top:50%;right:0%;transform:translate(0%,-50%);-ms-transform:translate(0%,-50%)}
+.boot-display-topmiddle{position:absolute;left:50%;top:0;transform:translate(-50%,0%);-ms-transform:translate(-50%,0%)}
+.boot-display-bottommiddle{position:absolute;left:50%;bottom:0;transform:translate(-50%,0%);-ms-transform:translate(-50%,0%)}
+.boot-display-container:hover .boot-display-hover{display:block}.boot-display-container:hover span.boot-display-hover{display:inline-block}.boot-display-hover{display:none}
+.boot-display-position{position:absolute}
+.boot-circle{border-radius:50%}
+.boot-round-small{border-radius:2px}.boot-round,.boot-round-medium{border-radius:4px}.boot-round-large{border-radius:8px}.boot-round-xlarge{border-radius:16px}.boot-round-xxlarge{border-radius:32px}
+.boot-row-padding,.boot-row-padding>.boot-half,.boot-row-padding>.boot-third,.boot-row-padding>.boot-twothird,.boot-row-padding>.boot-threequarter,.boot-row-padding>.boot-quarter,.boot-row-padding>.boot-col{padding:0 8px}
+.boot-container,.boot-panel{padding:0.01em 16px}.boot-panel{margin-top:16px;margin-bottom:16px}
+.boot-code,.boot-codespan{font-family:Consolas,"courier new";font-size:16px}
+.boot-code{width:auto;background-color:#fff;padding:8px 12px;border-left:4px solid #4CAF50;word-wrap:break-word}
+.boot-codespan{color:crimson;background-color:#f1f1f1;padding-left:4px;padding-right:4px;font-size:110%}
+.boot-card,.boot-card-2{box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)}
+.boot-card-4,.boot-hover-shadow:hover{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)}
+.boot-spin{animation:boot-spin 2s infinite linear}@keyframes boot-spin{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}}
+.boot-animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+.boot-animate-opacity{animation:opac 0.8s}@keyframes opac{from{opacity:0} to{opacity:1}}
+.boot-animate-top{position:relative;animation:animatetop 0.4s}@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+.boot-animate-left{position:relative;animation:animateleft 0.4s}@keyframes animateleft{from{left:-300px;opacity:0} to{left:0;opacity:1}}
+.boot-animate-right{position:relative;animation:animateright 0.4s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.boot-animate-bottom{position:relative;animation:animatebottom 0.4s}@keyframes animatebottom{from{bottom:-300px;opacity:0} to{bottom:0;opacity:1}}
+.boot-animate-zoom {animation:animatezoom 0.6s}@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}}
+.boot-animate-input{transition:width 0.4s ease-in-out}.boot-animate-input:focus{width:100%!important}
+.boot-opacity,.boot-hover-opacity:hover{opacity:0.60}.boot-opacity-off,.boot-hover-opacity-off:hover{opacity:1}
+.boot-opacity-max{opacity:0.25}.boot-opacity-min{opacity:0.75}
+.boot-greyscale-max,.boot-grayscale-max,.boot-hover-greyscale:hover,.boot-hover-grayscale:hover{filter:grayscale(100%)}
+.boot-greyscale,.boot-grayscale{filter:grayscale(75%)}.boot-greyscale-min,.boot-grayscale-min{filter:grayscale(50%)}
+.boot-sepia{filter:sepia(75%)}.boot-sepia-max,.boot-hover-sepia:hover{filter:sepia(100%)}.boot-sepia-min{filter:sepia(50%)}
+.boot-tiny{font-size:10px!important}.boot-small{font-size:12px!important}.boot-medium{font-size:15px!important}.boot-large{font-size:18px!important}
+.boot-xlarge{font-size:24px!important}.boot-xxlarge{font-size:36px!important}.boot-xxxlarge{font-size:48px!important}.boot-jumbo{font-size:64px!important}
+.boot-left-align{text-align:left!important}.boot-right-align{text-align:right!important}.boot-justify{text-align:justify!important}.boot-center{text-align:center!important}
+.boot-border-0{border:0!important}.boot-border{border:1px solid #ccc!important}
+.boot-border-top{border-top:1px solid #ccc!important}.boot-border-bottom{border-bottom:1px solid #ccc!important}
+.boot-border-left{border-left:1px solid #ccc!important}.boot-border-right{border-right:1px solid #ccc!important}
+.boot-topbar{border-top:6px solid #ccc!important}.boot-bottombar{border-bottom:6px solid #ccc!important}
+.boot-leftbar{border-left:6px solid #ccc!important}.boot-rightbar{border-right:6px solid #ccc!important}
+.boot-section,.boot-code{margin-top:16px!important;margin-bottom:16px!important}
+.boot-margin{margin:16px!important}.boot-margin-top{margin-top:16px!important}.boot-margin-bottom{margin-bottom:16px!important}
+.boot-margin-left{margin-left:16px!important}.boot-margin-right{margin-right:16px!important}
+.boot-padding-small{padding:4px 8px!important}.boot-padding{padding:8px 16px!important}.boot-padding-large{padding:12px 24px!important}
+.boot-padding-16{padding-top:16px!important;padding-bottom:16px!important}.boot-padding-24{padding-top:24px!important;padding-bottom:24px!important}
+.boot-padding-32{padding-top:32px!important;padding-bottom:32px!important}.boot-padding-48{padding-top:48px!important;padding-bottom:48px!important}
+.boot-padding-64{padding-top:64px!important;padding-bottom:64px!important}
+.boot-left{float:left!important}.boot-right{float:right!important}
+.boot-button:hover{color:#000!important;background-color:#ccc!important}
+.boot-transparent,.boot-hover-none:hover{background-color:transparent!important}
+.boot-hover-none:hover{box-shadow:none!important}
+/* Colors */
+.boot-amber,.boot-hover-amber:hover{color:#000!important;background-color:#ffc107!important}
+.boot-aqua,.boot-hover-aqua:hover{color:#000!important;background-color:#00ffff!important}
+.boot-blue,.boot-hover-blue:hover{color:#fff!important;background-color:#2196F3!important}
+.boot-light-blue,.boot-hover-light-blue:hover{color:#000!important;background-color:#87CEEB!important}
+.boot-brown,.boot-hover-brown:hover{color:#fff!important;background-color:#795548!important}
+.boot-cyan,.boot-hover-cyan:hover{color:#000!important;background-color:#00bcd4!important}
+.boot-blue-grey,.boot-hover-blue-grey:hover,.boot-blue-gray,.boot-hover-blue-gray:hover{color:#fff!important;background-color:#607d8b!important}
+.boot-green,.boot-hover-green:hover{color:#fff!important;background-color:#4CAF50!important}
+.boot-light-green,.boot-hover-light-green:hover{color:#000!important;background-color:#8bc34a!important}
+.boot-indigo,.boot-hover-indigo:hover{color:#fff!important;background-color:#3f51b5!important}
+.boot-khaki,.boot-hover-khaki:hover{color:#000!important;background-color:#f0e68c!important}
+.boot-lime,.boot-hover-lime:hover{color:#000!important;background-color:#cddc39!important}
+.boot-orange,.boot-hover-orange:hover{color:#000!important;background-color:#ff9800!important}
+.boot-deep-orange,.boot-hover-deep-orange:hover{color:#fff!important;background-color:#ff5722!important}
+.boot-pink,.boot-hover-pink:hover{color:#fff!important;background-color:#e91e63!important}
+.boot-purple,.boot-hover-purple:hover{color:#fff!important;background-color:#9c27b0!important}
+.boot-deep-purple,.boot-hover-deep-purple:hover{color:#fff!important;background-color:#673ab7!important}
+.boot-red,.boot-hover-red:hover{color:#fff!important;background-color:#f44336!important}
+.boot-sand,.boot-hover-sand:hover{color:#000!important;background-color:#fdf5e6!important}
+.boot-teal,.boot-hover-teal:hover{color:#fff!important;background-color:var(--main-color)!important}
+.boot-yellow,.boot-hover-yellow:hover{color:#000!important;background-color:#ffeb3b!important}
+.boot-white,.boot-hover-white:hover{color:#000!important;background-color:#fff!important}
+.boot-black,.boot-hover-black:hover{color:#fff!important;background-color:#000!important}
+.boot-grey,.boot-hover-grey:hover,.boot-gray,.boot-hover-gray:hover{color:#000!important;background-color:#9e9e9e!important}
+.boot-light-grey,.boot-hover-light-grey:hover,.boot-light-gray,.boot-hover-light-gray:hover{color:#000!important;background-color:#f1f1f1!important}
+.boot-dark-grey,.boot-hover-dark-grey:hover,.boot-dark-gray,.boot-hover-dark-gray:hover{color:#fff!important;background-color:#616161!important}
+.boot-pale-red,.boot-hover-pale-red:hover{color:#000!important;background-color:#ffdddd!important}
+.boot-pale-green,.boot-hover-pale-green:hover{color:#000!important;background-color:#ddffdd!important}
+.boot-pale-yellow,.boot-hover-pale-yellow:hover{color:#000!important;background-color:#ffffcc!important}
+.boot-pale-blue,.boot-hover-pale-blue:hover{color:#000!important;background-color:#ddffff!important}
+.boot-text-amber,.boot-hover-text-amber:hover{color:#ffc107!important}
+.boot-text-aqua,.boot-hover-text-aqua:hover{color:#00ffff!important}
+.boot-text-blue,.boot-hover-text-blue:hover{color:#2196F3!important}
+.boot-text-light-blue,.boot-hover-text-light-blue:hover{color:#87CEEB!important}
+.boot-text-brown,.boot-hover-text-brown:hover{color:#795548!important}
+.boot-text-cyan,.boot-hover-text-cyan:hover{color:#00bcd4!important}
+.boot-text-blue-grey,.boot-hover-text-blue-grey:hover,.boot-text-blue-gray,.boot-hover-text-blue-gray:hover{color:#607d8b!important}
+.boot-text-green,.boot-hover-text-green:hover{color:#4CAF50!important}
+.boot-text-light-green,.boot-hover-text-light-green:hover{color:#8bc34a!important}
+.boot-text-indigo,.boot-hover-text-indigo:hover{color:#3f51b5!important}
+.boot-text-khaki,.boot-hover-text-khaki:hover{color:#b4aa50!important}
+.boot-text-lime,.boot-hover-text-lime:hover{color:#cddc39!important}
+.boot-text-orange,.boot-hover-text-orange:hover{color:#ff9800!important}
+.boot-text-deep-orange,.boot-hover-text-deep-orange:hover{color:#ff5722!important}
+.boot-text-pink,.boot-hover-text-pink:hover{color:#e91e63!important}
+.boot-text-purple,.boot-hover-text-purple:hover{color:#9c27b0!important}
+.boot-text-deep-purple,.boot-hover-text-deep-purple:hover{color:#673ab7!important}
+.boot-text-red,.boot-hover-text-red:hover{color:#f44336!important}
+.boot-text-sand,.boot-hover-text-sand:hover{color:#fdf5e6!important}
+.boot-text-teal,.boot-hover-text-teal:hover{color:var(--main-color)!important}
+.boot-text-yellow,.boot-hover-text-yellow:hover{color:#d2be0e!important}
+.boot-text-white,.boot-hover-text-white:hover{color:#fff!important}
+.boot-text-black,.boot-hover-text-black:hover{color:#000!important}
+.boot-text-grey,.boot-hover-text-grey:hover,.boot-text-gray,.boot-hover-text-gray:hover{color:#757575!important}
+.boot-text-light-grey,.boot-hover-text-light-grey:hover,.boot-text-light-gray,.boot-hover-text-light-gray:hover{color:#f1f1f1!important}
+.boot-text-dark-grey,.boot-hover-text-dark-grey:hover,.boot-text-dark-gray,.boot-hover-text-dark-gray:hover{color:#3a3a3a!important}
+.boot-border-amber,.boot-hover-border-amber:hover{border-color:#ffc107!important}
+.boot-border-aqua,.boot-hover-border-aqua:hover{border-color:#00ffff!important}
+.boot-border-blue,.boot-hover-border-blue:hover{border-color:#2196F3!important}
+.boot-border-light-blue,.boot-hover-border-light-blue:hover{border-color:#87CEEB!important}
+.boot-border-brown,.boot-hover-border-brown:hover{border-color:#795548!important}
+.boot-border-cyan,.boot-hover-border-cyan:hover{border-color:#00bcd4!important}
+.boot-border-blue-grey,.boot-hover-border-blue-grey:hover,.boot-border-blue-gray,.boot-hover-border-blue-gray:hover{border-color:#607d8b!important}
+.boot-border-green,.boot-hover-border-green:hover{border-color:#4CAF50!important}
+.boot-border-light-green,.boot-hover-border-light-green:hover{border-color:#8bc34a!important}
+.boot-border-indigo,.boot-hover-border-indigo:hover{border-color:#3f51b5!important}
+.boot-border-khaki,.boot-hover-border-khaki:hover{border-color:#f0e68c!important}
+.boot-border-lime,.boot-hover-border-lime:hover{border-color:#cddc39!important}
+.boot-border-orange,.boot-hover-border-orange:hover{border-color:#ff9800!important}
+.boot-border-deep-orange,.boot-hover-border-deep-orange:hover{border-color:#ff5722!important}
+.boot-border-pink,.boot-hover-border-pink:hover{border-color:#e91e63!important}
+.boot-border-purple,.boot-hover-border-purple:hover{border-color:#9c27b0!important}
+.boot-border-deep-purple,.boot-hover-border-deep-purple:hover{border-color:#673ab7!important}
+.boot-border-red,.boot-hover-border-red:hover{border-color:#f44336!important}
+.boot-border-sand,.boot-hover-border-sand:hover{border-color:#fdf5e6!important}
+.boot-border-teal,.boot-hover-border-teal:hover{border-color:var(--main-color)!important}
+.boot-border-yellow,.boot-hover-border-yellow:hover{border-color:#ffeb3b!important}
+.boot-border-white,.boot-hover-border-white:hover{border-color:#fff!important}
+.boot-border-black,.boot-hover-border-black:hover{border-color:#000!important}
+.boot-border-grey,.boot-hover-border-grey:hover,.boot-border-gray,.boot-hover-border-gray:hover{border-color:#9e9e9e!important}
+.boot-border-light-grey,.boot-hover-border-light-grey:hover,.boot-border-light-gray,.boot-hover-border-light-gray:hover{border-color:#f1f1f1!important}
+.boot-border-dark-grey,.boot-hover-border-dark-grey:hover,.boot-border-dark-gray,.boot-hover-border-dark-gray:hover{border-color:#616161!important}
+.boot-border-pale-red,.boot-hover-border-pale-red:hover{border-color:#ffe7e7!important}.boot-border-pale-green,.boot-hover-border-pale-green:hover{border-color:#e7ffe7!important}
+.boot-border-pale-yellow,.boot-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.boot-border-pale-blue,.boot-hover-border-pale-blue:hover{border-color:#e7ffff!important}

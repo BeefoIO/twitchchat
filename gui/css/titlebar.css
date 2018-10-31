@@ -1,0 +1,133 @@
+body {
+    padding: 0px;
+    margin: 0px; 
+}
+
+#title-bar {
+    -webkit-app-region: drag;
+    height: 35px; 
+    background-color: #d0752e;
+    padding: none;
+    margin: 0px; 
+    font-family: var(--title-font);
+    /*border-bottom: 0.5px solid black!important;*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
+#title {
+    position: fixed;
+    top: 2px;
+    font-size: 20px;
+    left: 6px; 
+}
+
+#title-bar-btns {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    top: 2.5px;
+    right: 6px;
+}
+
+.btn-close {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-close:hover {
+    color: #ff0000;
+    text-decoration: none;
+}
+.btn-close:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.btn-min {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-min:hover {
+    color: #292929;
+    text-decoration: none;
+}
+.btn-min:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.buttons {
+    padding-right: 8px;
+    padding-top: 3px;
+    float: right;
+    line-height: 0px;
+  }
+  
+  .buttons:hover a {
+    visibility: visible;
+  }
+  
+  .close {
+    background: #ff5c5c;
+    font-size: 9pt;
+    margin-left: 5px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #e33e41;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 1;
+    cursor: pointer;
+  }
+  
+  .close:active {
+    background: #c14645;
+    border: 1px solid #b03537;
+  }
+  
+  .close:active .closebutton {
+    color: #4e0002;
+  }
+  
+  .closebutton {
+    color: #820005;
+    cursor: default;
+  }
+  
+  .minimize {
+    background: #ffbd4c;
+    font-size: 9pt;
+    line-height: 11px;
+    margin-left: 4px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #e09e3e;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  .minimize {
+      float: right;
+      font-weight: 700;
+      line-height: 1;
+      color: #000;
+      text-shadow: 0 1px 0 #fff;
+      opacity: 1;
+  }
+  
+  .minimize:active {
+    background: #c08e38;
+    border: 1px solid #af7c33;
+  }
+  
+  /*.minimize:active .minimizebutton {
+    color: #5a2607;
+  }
+  
+  .minimizebutton {
+    color: #9a5518;
+    cursor: default;
+  }*/

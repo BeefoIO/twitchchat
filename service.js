@@ -1,11 +1,43 @@
 var tmi = require('./tmi.js/index');
 var channelJoinMessages = ['#BoostFuze'];
-var channelSubMessages = ['#BoostFuze', '#syrinxx1337', '#bibaboy'];
+var channelSubMessages = ['#BoostFuze', '#syrinxx1337'];
 var saidHelloTo = [];
 var express = require('express');
+var cors = require('cors');
 var app = express();
+var assets = express();
 app.use(express.static('public'));
+assets.use('/', express.static('assets'));
+assets.use('/', function(req, res, next) {
+
+    /**
+     * Headers
+     */
+    res.header("Access-Control-Allow-Origin",  "*");
+    
+    next();
+
+
+});
+/*assets.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Pass to next layer of middleware
+    next();
+});*/
+app.set('view engine', 'ejs')
+app.set('views', './views');
 var port = 6077;
+var portAssets = 6078;
+
+var assetsServer = assets.listen(portAssets, function () {
+    console.log('WebServer started for assets');
+    console.log('Assets are served here: http://localhost:' + portAssets + '/');
+});
+
+
 
 // every channel to lowercase
 channelJoinMessages.forEach(channel => {
@@ -15,7 +47,7 @@ channelSubMessages.forEach(channel => {
     channelSubMessages.push(channel.toLocaleLowerCase());
 })
 
-awaitLoginToken().then(function (token, uname){
+awaitLoginToken().then(function (loginData){
     // auth stuff
     var options = {
         options: {
@@ -28,10 +60,10 @@ awaitLoginToken().then(function (token, uname){
             reconnect: true
         },
         identity: {
-            username: uname, 
-            password: "oauth:" + token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
+            username: loginData.username, 
+            password: "oauth:" + loginData.token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
         },
-        channels: ['#syrinxx1337', '#BoostFuze', '#bibaboy']
+        channels: ['#syrinxx1337', '#BoostFuze', '#bibaboy', '#Lory']
     };
 
     var client = new tmi.client(options);
@@ -109,9 +141,12 @@ function awaitLoginToken(username, password) {
         });
         app.get('/callback/twitch/:token/:username', function(req, res){
             if(req.params.username){
-                res.send('Authorized');
-                server.close();
-                resolve(req.params.token, req.params.username);
+                res.render('authorized');
+                //server.close();
+                resolve({
+                    username: req.params.username,
+                    token: req.params.token
+                });
             }else{
                 res.send('No username provided');
                 console.log('No user: ' + req.params.username);

@@ -1,0 +1,30 @@
+body{
+    color: #ffffff;
+    background-color: #131313;
+    font-family: var(--main-font);
+}
+
+html {
+    overflow: hidden!important;
+}
+
+.boot-logo-color {
+    color: var(--main-color);
+}
+.boot-2nd-logo-color {
+    color: var(--second-color);
+}
+.boot-container {
+    /*overflow: auto;*/
+    width: 800px;
+    height: 513px;
+    overflow: auto;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.discord {
+    margin-top: 5.5px;
+}

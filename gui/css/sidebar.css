@@ -1,0 +1,33 @@
+.boot-sidebar{
+    background-color: var(--second-color);
+}
+
+.boot-active {
+    background-color: var(--main-color);
+}
+
+.boot-bar-item {
+    height: 52px;
+    font-size: 22px;
+}
+
+.boot-button {
+    
+}
+
+.boot-bar-img {
+    margin-bottom: 3px;
+    margin-left: -1px; 
+}
+
+.boot-item-bottom {
+    margin-top: 100px;
+}
+
+#close-sidebar {
+    cursor: pointer;
+}
+
+.sidebar-collapse {
+    height: 52px;
+}

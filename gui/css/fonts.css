@@ -1,0 +1,66 @@
+@font-face { font-family: 'pyrite';
+    src: url('../fonts/pyrite.otf') format('opentype'); }
+@font-face { font-family: 'dimis';
+    src: url('../fonts/dimis.ttf') format('truetype'); }
+@font-face { font-family: 'csgo';
+    src: url('../fonts/cs_regular.ttf') format('truetype'); }
+@font-face { font-family: 'painter';
+    src: url('../fonts/painter.ttf') format('truetype'); }
+@font-face { font-family: 'rainbow_bridge';
+    src: url('../fonts/rainbow_bridge.ttf') format('truetype'); }
+@font-face { font-family: 'sweet_sensations';
+    src: url('../fonts/sweet_sensations.ttf') format('truetype'); }
+@font-face { font-family: 'timeburner';
+    src: url('../fonts/timeburner.ttf') format('truetype'); }
+@font-face { font-family: 'trench';
+    src: url('../fonts/trench.ttf') format('truetype'); }
+@font-face { font-family: 'caviar_dreams';
+    src: url('../fonts/caviar_dreams.ttf') format('truetype'); }
+@font-face { font-family: 'juicy_fruity';
+    src: url('../fonts/juicy_fruity.ttf') format('truetype'); }
+@font-face { font-family: 'kiona';
+    src: url('../fonts/kiona.ttf') format('truetype'); }
+@font-face { font-family: 'loud_and_clear';
+    src: url('../fonts/loud_and_clear.ttf') format('truetype'); }
+@font-face { font-family: 'moon_get';
+    src: url('../fonts/moon_get.ttf') format('truetype'); }
+@font-face { font-family: 'never_surrender';
+    src: url('../fonts/never_surrender.ttf') format('truetype'); }
+@font-face { font-family: 'roboto';
+    src: url('../fonts/roboto.ttf') format('truetype'); }
+@font-face { font-family: 'sacred_hertz';
+    src: url('../fonts/scared_hertz.otf') format('opentype'); }
+@font-face { font-family: 'three_d';
+    src: url('../fonts/3d.ttf') format('truetype'); }
+@font-face { font-family: 'avanger';
+    src: url('../fonts/avanger.ttf') format('truetype'); }
+@font-face { font-family: 'batman';
+    src: url('../fonts/batman.ttf') format('truetype'); }
+@font-face { font-family: 'champagne';
+    src: url('../fonts/champagne.ttf') format('truetype'); }
+@font-face { font-family: 'coolvetica';
+    src: url('../fonts/coolvetica.ttf') format('truetype'); }
+@font-face { font-family: 'demonized';
+    src: url('../fonts/demonized.ttf') format('truetype'); }
+@font-face { font-family: 'hacked';
+    src: url('../fonts/hacked.ttf') format('truetype'); }
+@font-face { font-family: 'ds_digi';
+    src: url('../fonts/ds_digi.ttf') format('truetype'); }
+@font-face { font-family: 'east_border';
+    src: url('../fonts/east_border.ttf') format('truetype'); }
+@font-face { font-family: 'flighter';
+    src: url('../fonts/flighter.ttf') format('truetype'); }
+@font-face { font-family: 'hemera';
+    src: url('../fonts/hemera.ttf') format('truetype'); }
+@font-face { font-family: 'knife_princess';
+    src: url('../fonts/knife_princess.ttf') format('truetype'); }
+@font-face { font-family: 'old_london';
+    src: url('../fonts/old_london.ttf') format('truetype'); }
+@font-face { font-family: 'road_rage';
+    src: url('../fonts/road_rage.otf') format('opentype'); }
+@font-face { font-family: 'starjedi';
+    src: url('../fonts/starjedi.ttf') format('truetype'); }
+@font-face { font-family: 'varsity';
+    src: url('../fonts/varsity.ttf') format('truetype'); }
+@font-face { font-family: 'vcr_mono';
+    src: url('../fonts/vcr_mono.ttf') format('truetype'); }

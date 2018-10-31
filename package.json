@@ -2,9 +2,9 @@
   "name": "twitchchat",
   "version": "1.0.0",
   "description": "",
-  "main": "service.js",
+  "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -13,6 +13,8 @@
   "author": "Beefo",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.4",
+    "ejs": "^2.6.1",
     "electron": "^3.0.6",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
