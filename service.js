@@ -33,7 +33,7 @@ awaitLoginToken().then(function (loginData){
     // auth stuff
     var options = {
         options: {
-            //debug: true
+            debug: true
         },
         connection: {
             server: 'irc-ws.chat.twitch.tv',
@@ -45,7 +45,7 @@ awaitLoginToken().then(function (loginData){
             username: loginData.username, 
             password: "oauth:" + loginData.token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
         },
-        channels: ['#syrinxx1337', '#BoostFuze', '#bibaboy', '#Lory']
+        channels: ['#syrinxx1337', '#BoostFuze']
     };
 
     var client = new tmi.client(options);

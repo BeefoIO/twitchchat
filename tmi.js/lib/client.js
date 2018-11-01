@@ -618,6 +618,19 @@ client.prototype.handleMessage = function handleMessage(message) {
 
                         this.emit("subgift", channel, username, recipient, {plan, planName}, userstate);
                     }
+                    // Handle all other
+                    else {
+                        this.log.info('');
+                        this.log.info('');
+                        this.log.info('None-handled-message: ' + msgid);
+                        this.log.info(message);
+                        this.log.info('');
+                        console.log(message);
+                        this.log.info('');
+                        this.log.info(JSON.stringify(message));
+                        this.log.info('');
+                        this.log.info('');
+                    }
                     break;
 
                 // Channel is now hosting another channel or exited host mode..
