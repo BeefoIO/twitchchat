@@ -33,7 +33,7 @@ awaitLoginToken().then(function (loginData){
     // auth stuff
     var options = {
         options: {
-            debug: true
+            //debug: true
         },
         connection: {
             server: 'irc-ws.chat.twitch.tv',
@@ -45,7 +45,7 @@ awaitLoginToken().then(function (loginData){
             username: loginData.username, 
             password: "oauth:" + loginData.token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
         },
-        channels: ['#syrinxx1337', '#BoostFuze']
+        channels: ['#syrinxx1337', '#BoostFuze', '#shlorox']
     };
 
     var client = new tmi.client(options);
@@ -92,7 +92,13 @@ awaitLoginToken().then(function (loginData){
     });
 
     // SubGift Event
-    client.on("subgift", function (channel, username, recipient, method, userstate) {
+    client.on("subgift", function (channel, username, recipient, method, userstate, message) {
+        console.log('');
+        console.log('');
+        console.log(message);
+        console.log('');
+        console.log('');
+
         if(channelSubMessages.includes(channel)){
             console.log('subgift event triggered');
             if(username.toLowerCase() !== options.identity.username.toLowerCase()){
@@ -105,6 +111,24 @@ awaitLoginToken().then(function (loginData){
                 });
             }
         }
+    });
+
+    client.on("submysterygift", function(channel, username, method, userstate, message) {
+        console.log("");
+        console.log("");
+        console.log(message);
+        console.log("");
+        console.log("");
+    });
+
+    client.on("otherthings", function(things, msgid) {
+        console.log("");
+        console.log("");
+        console.log("MSGID: " + msgid);
+        console.log("");
+        console.log(things);
+        console.log("");
+        console.log("");
     });
 
     // Cheer Event

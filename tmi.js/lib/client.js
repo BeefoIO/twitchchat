@@ -605,7 +605,7 @@ client.prototype.handleMessage = function handleMessage(message) {
 					// Handle subgift
                     else if (msgid == "subgift") {
                         var username = message.tags["display-name"] || message.tags["login"];
-                        var recipient = message.tags["msg-param-recipient-display-name"] || message.tags["login"];
+                        var recipient = message.tags["msg-param-recipient-display-name"] || message.tags["msg-param-recipient-user-name"];
                         var plan = message.tags["msg-param-sub-plan"];
                         var planName = _.replaceAll(_.get(message.tags["msg-param-sub-plan-name"], null), {
                             "\\\\s": " ",
@@ -616,20 +616,34 @@ client.prototype.handleMessage = function handleMessage(message) {
                         });
                         var userstate = message.tags;
 
-                        this.emit("subgift", channel, username, recipient, {plan, planName}, userstate);
+                        this.emit("subgift", channel, username, recipient, {plan, planName}, userstate, message);
+                    }
+                    // Handle submysterygift
+                    else if (msgid == "submysterygift") {
+                        var username = message.tags["display-name"] || message.tags["login"];
+                        var plan = message.tags["msg-param-sub-plan"];
+                        var planName = _.replaceAll(_.get(message.tags["msg-param-sub-plan-name"], null), {
+                            "\\\\s": " ",
+                            "\\\\:": ";",
+                            "\\\\\\\\": "\\",
+                            "\\r": "\r",
+                            "\\n": "\n"
+                        });
+                        var userstate = message.tags;
+
+                        this.emit("submysterygift", channel, username, {plan, planName}, userstate, message)
                     }
                     // Handle all other
                     else {
-                        this.log.info('');
-                        this.log.info('');
-                        this.log.info('None-handled-message: ' + msgid);
-                        this.log.info(message);
-                        this.log.info('');
+                        console.log('');
+                        console.log('');
+                        console.log('None-handled-message: ' + msgid);
+                        console.log('');
                         console.log(message);
-                        this.log.info('');
-                        this.log.info(JSON.stringify(message));
-                        this.log.info('');
-                        this.log.info('');
+                        console.log('');
+                        console.log('');
+
+                        this.emit("otherthings", message, msgid)
                     }
                     break;
 
