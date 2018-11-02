@@ -616,7 +616,7 @@ client.prototype.handleMessage = function handleMessage(message) {
                         });
                         var userstate = message.tags;
 
-                        this.emit("subgift", channel, username, recipient, {plan, planName}, userstate, message);
+                        this.emit("subgift", channel, username, recipient, {plan, planName}, false, userstate, message);
                     }
                     // Handle submysterygift
                     else if (msgid == "submysterygift") {
@@ -629,9 +629,10 @@ client.prototype.handleMessage = function handleMessage(message) {
                             "\\r": "\r",
                             "\\n": "\n"
                         });
+                        var subCount = message.tags["msg-param-mass-gift-count"];
                         var userstate = message.tags;
 
-                        this.emit("submysterygift", channel, username, {plan, planName}, userstate, message)
+                        this.emit("subgift", channel, username, subCount, {plan, planName}, true, userstate, message)
                     }
                     // Handle all other
                     else {

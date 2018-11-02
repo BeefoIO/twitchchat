@@ -45,7 +45,7 @@ awaitLoginToken().then(function (loginData){
             username: loginData.username, 
             password: "oauth:" + loginData.token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
         },
-        channels: ['#syrinxx1337', '#BoostFuze']
+        channels: ['#syrinxx1337', '#BoostFuze', '#shlorox']
     };
 
     var client = new tmi.client(options);
@@ -92,34 +92,46 @@ awaitLoginToken().then(function (loginData){
     });
 
     // SubGift Event
-    client.on("subgift", function (channel, username, recipient, method, userstate, message) {
+    client.on("subgift", function (channel, username, recipient, method, subMysteryGiftBool, userstate, message) {
+        if(subMysteryGiftBool){
+            counter = recipient;
+            counterRun = 0;
+            console.log('submysterygift event triggered');
+            if(username.toLowerCase() !== options.identity.username.toLowerCase() && channelSubMessages.includes(channel)){
+                client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " gifted " + recipient + " to the Community syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
+                    console.log(err);
+                });
+            }
+        }else {
+            counter = 0;
+        }
+        if(counter != counterRun){
+            return;
+        }
         console.log('');
         console.log('');
         console.log(message);
         console.log('');
         console.log('');
 
+        console.log('subgift event triggered');
+
         if(channelSubMessages.includes(channel)){
-            console.log('subgift event triggered');
             if(username.toLowerCase() !== options.identity.username.toLowerCase()){
                 client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " to " + recipient + " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
-                    console.log(err);
-                });
-            }else{
-                client.say(channel, " syrinxxGift bibaGift syrinxxGift Danke @" + username +  " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
                     console.log(err);
                 });
             }
         }
     });
 
-    client.on("submysterygift", function(channel, username, method, userstate, message) {
+    /*client.on("submysterygift", function(channel, username, method, userstate, message) {
         console.log("");
         console.log("");
         console.log(message);
         console.log("");
         console.log("");
-    });
+    });*/
 
     client.on("otherthings", function(things, msgid) {
         console.log("");
