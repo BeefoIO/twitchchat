@@ -109,7 +109,7 @@ awaitLoginToken().then(function (loginData){
                         console.log(err);
                     });
             }
-        }else if(!subMysteryGiftBool && !counterRun) {
+        }else if(!subMysteryGiftBool && counterRun == undefined) {
             counter = 0;
             counterRun = 0;
         }
