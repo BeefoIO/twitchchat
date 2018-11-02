@@ -93,26 +93,35 @@ awaitLoginToken().then(function (loginData){
 
     // SubGift Event
     client.on("subgift", function (channel, username, recipient, method, subMysteryGiftBool, userstate, message) {
+
         if(subMysteryGiftBool){
+            console.log(recipient);
             counter = recipient;
             counterRun = 0;
             console.log('submysterygift event triggered');
             if(username.toLowerCase() !== options.identity.username.toLowerCase() && channelSubMessages.includes(channel)){
-                client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " gifted " + recipient + " to the Community syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
-                    console.log(err);
-                });
+                if(recipient !== true)
+                    client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " gifted " + recipient + " subs to the Community syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
+                        console.log(err);
+                    });
+                else 
+                    client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " gifted 1 sub to the Community syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
+                        console.log(err);
+                    });
             }
-        }else {
+        }else if(!subMysteryGiftBool && !counterRun) {
             counter = 0;
+            counterRun = 0;
         }
         if(counter != counterRun){
+            counterRun++;
             return;
         }
-        console.log('');
+        /*console.log('');
         console.log('');
         console.log(message);
         console.log('');
-        console.log('');
+        console.log('');*/
 
         console.log('subgift event triggered');
 
