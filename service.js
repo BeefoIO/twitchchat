@@ -95,8 +95,7 @@ awaitLoginToken().then(function (loginData){
     client.on("subgift", function (channel, username, recipient, method, subMysteryGiftBool, userstate, message) {
 
         if(subMysteryGiftBool){
-            console.log(recipient);
-            counter = recipient;
+            counter = recipient + 1;
             counterRun = 0;
             console.log('submysterygift event triggered');
             if(username.toLowerCase() !== options.identity.username.toLowerCase() && channelSubMessages.includes(channel)){
@@ -109,11 +108,11 @@ awaitLoginToken().then(function (loginData){
                         console.log(err);
                     });
             }
-        }else if(!subMysteryGiftBool && counterRun == undefined) {
+        }else if(!subMysteryGiftBool && typeof counterRun !== "undefined") {
             counter = 0;
             counterRun = 0;
         }
-        if(counter != counterRun){
+        if(counterRun <= counter){
             counterRun++;
             return;
         }
