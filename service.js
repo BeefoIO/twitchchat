@@ -126,7 +126,7 @@ awaitLoginToken().then(function (loginData){
 
         if(channelSubMessages.includes(channel)){
             if(username.toLowerCase() !== options.identity.username.toLowerCase()){
-                client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " to " + recipient + " syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
+                client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " to " + recipient + " syrinxxGift bibaGift syrinxxGift "/* your subgift message */).catch(err => {
                     console.log(err);
                 });
             }
