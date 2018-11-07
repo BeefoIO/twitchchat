@@ -1,6 +1,5 @@
 var tmi = require('./tmi.js/index');
-var logger = require('./file.log/index');
-//logger.createFile();
+var logger = require('@beefoio/file.log');
 logger.setLevel('debug');
 var channelJoinMessages = ['#BoostFuze'];
 var channelSubMessages = ['#BoostFuze', '#syrinxx1337', '#paaaaaaaaaaddy'];

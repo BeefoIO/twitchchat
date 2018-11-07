@@ -13,6 +13,7 @@
   "author": "Beefo",
   "license": "ISC",
   "dependencies": {
+    "@beefoio/file.log": "^1.0.0",
     "cors": "^2.8.4",
     "ejs": "^2.6.1",
     "electron": "^3.0.6",
