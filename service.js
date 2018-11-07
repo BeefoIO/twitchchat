@@ -1,6 +1,9 @@
 var tmi = require('./tmi.js/index');
+var logger = require('./file.log/index');
+//logger.createFile();
+logger.setLevel('debug');
 var channelJoinMessages = ['#BoostFuze'];
-var channelSubMessages = ['#BoostFuze', '#syrinxx1337'];
+var channelSubMessages = ['#BoostFuze', '#syrinxx1337', '#paaaaaaaaaaddy'];
 var saidHelloTo = [];
 var express = require('express');
 var cors = require('cors');
@@ -45,12 +48,13 @@ awaitLoginToken().then(function (loginData){
             username: loginData.username, 
             password: "oauth:" + loginData.token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
         },
-        channels: ['#syrinxx1337', '#BoostFuze', '#shlorox']
+        channels: ['#syrinxx1337', '#BoostFuze', '#paaaaaaaaaaddy']
     };
 
     var client = new tmi.client(options);
 
     client.connect().then(idk => {
+        logger.info('Authenticated successfully');
         console.log('Authenticated successfully');
     }).catch(err => {
         console.log(err);
@@ -93,7 +97,7 @@ awaitLoginToken().then(function (loginData){
 
     // SubGift Event
     client.on("subgift", function (channel, username, recipient, method, subMysteryGiftBool, userstate, message) {
-
+        logger.debug(JSON.stringify(message));
         if(subMysteryGiftBool){
             counter = recipient + 1;
             counterRun = 0;
