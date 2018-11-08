@@ -1,32 +1,35 @@
 var tmi = require('./tmi.js/index');
 var logger = require('@beefoio/file.log');
-logger.setLevel('debug');
-var channelJoinMessages = ['#BoostFuze'];
-var channelSubMessages = ['#BoostFuze', '#syrinxx1337', '#paaaaaaaaaaddy'];
+logger.enableConsoleOutput();
+logger.setLevel('info');
+//var channelSubMessages = ['#BoostFuze', '#syrinxx1337', '#paaaaaaaaaaddy'];
 var saidHelloTo = [];
 var express = require('express');
 var cors = require('cors');
 var app = express();
 var assets = express();
+var fs = require('fs');
+
+var settings = fs.readFileSync('./settings.json', 'utf8');
+var settings = JSON.parse(settings);
+
+var channelSubMessages = settings.channelSubMessages;
 
 app.use(express.static('public'));
 assets.use(express.static('assets'));
 app.set('view engine', 'ejs')
 app.set('views', './views');
 var port = 6077;
-var portAssets = 6078;
+var portAssets = 6078
 
 var assetsServer = assets.listen(portAssets, function () {
-    console.log('WebServer started for assets');
-    console.log('Assets are served here: http://localhost:' + portAssets + '/');
+    logger.info('WebServer started for assets');
+    logger.info('Assets are served here: http://localhost:' + portAssets + '/');
 });
 
 
 
 // every channel to lowercase
-channelJoinMessages.forEach(channel => {
-    channelJoinMessages.push(channel.toLocaleLowerCase());
-});
 channelSubMessages.forEach(channel => {
     channelSubMessages.push(channel.toLocaleLowerCase());
 })
@@ -47,39 +50,31 @@ awaitLoginToken().then(function (loginData){
             username: loginData.username, 
             password: "oauth:" + loginData.token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
         },
-        channels: ['#syrinxx1337', '#BoostFuze', '#paaaaaaaaaaddy']
+        channels: settings.channels
     };
 
     var client = new tmi.client(options);
 
     client.connect().then(idk => {
         logger.info('Authenticated successfully');
-        console.log('Authenticated successfully');
     }).catch(err => {
-        console.log(err);
+        logger.error(err);
     });
 
     // Events
-    // Chat Event
-    client.on("chat", function (channel, userstate, message, self) {
-        if (self) return;
-        var username = userstate.username;
-        
-        if(channelJoinMessages.includes(channel) && !saidHelloTo.includes(username) && message.toLowerCase().includes(options.identity.username.toLowerCase())) {
-            console.log(saidHelloTo);
-            client.say(channel, "syrinxxHi " + username + " syrinxxBlau"/* your hello message*/).catch(err => {
-                console.log(err);
-            });
-            saidHelloTo.push(username);
-        }
-    });
-
     // Resub Event
     client.on("resub", function (channel, username, months, message, userstate, methods) {
         if(channelSubMessages.includes(channel) && username.toLowerCase() !== options.identity.username.toLowerCase()){
-            console.log('resub event triggered');
-            client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " x" + months + "  syrinxxSub bibaSub syrinxxSub "/* your resub message*/).catch(err => {
-                console.log(err);
+            if (typeof(settings.resubmessage[channel.substring(1)]) != "undefined"){
+                var string = settings.resubmessage[channel.substring(1)].replace(/%username%/g, username).replace(/%months%/g, months);
+            }else if(typeof(settings.resubmessage.default) != "undefined"){
+                var string = settings.resubmessage.default.replace(/%username%/g, username).replace(/%months%/g, months);
+            }else {
+                return;
+            }
+            logger.info('resub event triggered');
+            client.say(channel, string).catch(err => {
+                logger.error(err);
             });
         }
     });
@@ -87,9 +82,16 @@ awaitLoginToken().then(function (loginData){
     // Sub Event
     client.on("subscription", function (channel, username, method, message, userstate) {
         if(channelSubMessages.includes(channel) && username.toLowerCase() !== options.identity.username.toLowerCase()){
-            console.log('sub event triggered');
-            client.say(channel, "syrinxxSub bibaSub syrinxxSub " + username + " syrinxxSub bibaSub syrinxxSub "/* your sub message*/).catch(err => {
-                console.log(err);
+            if (typeof(settings.submessage[channel.substring(1)]) != "undefined"){
+                var string = settings.submessage[channel.substring(1)].replace(/%username%/g, username);
+            }else if(typeof(settings.submessage.default) != "undefined"){
+                var string = settings.submessage.default.replace(/%username%/g, username);
+            }else {
+                return;
+            }
+            logger.info('sub event triggered');
+            client.say(channel, string).catch(err => {
+                logger.error(err);
             });
         }
     });
@@ -100,18 +102,34 @@ awaitLoginToken().then(function (loginData){
         if(subMysteryGiftBool){
             counter = recipient + 1;
             counterRun = 0;
-            console.log('submysterygift event triggered');
+            logger.info('submysterygift event triggered');
             if(username.toLowerCase() !== options.identity.username.toLowerCase() && channelSubMessages.includes(channel)){
-                if(recipient !== true)
-                    client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " gifted " + recipient + " subs to the Community syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
-                        console.log(err);
+                if(recipient !== true){
+                    if (typeof(settings.submysterygiftmessage[channel.substring(1)]) != "undefined"){
+                        var string = settings.submysterygiftmessage[channel.substring(1)].replace(/%username%/g, username).replace(/%subs%/g, recipient);
+                    }else if(typeof(settings.submysterygiftmessage.default) != "undefined"){
+                        var string = settings.submysterygiftmessage.default.replace(/%username%/g, username).replace(/%subs%/g, recipient);
+                    }else {
+                        return;
+                    }
+                    client.say(channel, string).catch(err => {
+                        logger.error(err);
                     });
-                else 
-                    client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " gifted 1 sub to the Community syrinxxGift bibaGift syrinxxGift "/* your subgift message*/).catch(err => {
-                        console.log(err);
+                }else{ 
+                    if (typeof(settings.submysterygiftmessage[channel.substring(1)]) != "undefined"){
+                        var string = settings.submysterygiftmessage[channel.substring(1)].replace(/%username%/g, username).replace(/%subs%/g, "1");
+                    }else if(typeof(settings.submysterygiftmessage.default) != "undefined"){
+                        var string = settings.submysterygiftmessage.default.replace(/%username%/g, username).replace(/%subs%/g, "1");
+                    }else {
+                        return;
+                    }
+                    client.say(channel, string).catch(err => {
+                        logger.error(err);
                     });
+                }
             }
-        }else if(!subMysteryGiftBool && typeof counterRun !== "undefined") {
+            return;
+        }else if(!subMysteryGiftBool && typeof(counterRun) != "undefined") {
             counter = 0;
             counterRun = 0;
         }
@@ -119,39 +137,46 @@ awaitLoginToken().then(function (loginData){
             counterRun++;
             return;
         }
-        /*console.log('');
-        console.log('');
-        console.log(message);
-        console.log('');
-        console.log('');*/
+        /*logger.info('');
+        logger.info('');
+        logger.info(message);
+        logger.info('');
+        logger.info('');*/
 
-        console.log('subgift event triggered');
+        logger.info('subgift event triggered');
 
         if(channelSubMessages.includes(channel)){
             if(username.toLowerCase() !== options.identity.username.toLowerCase()){
-                client.say(channel, "syrinxxGift bibaGift syrinxxGift " + username + " to " + recipient + " syrinxxGift bibaGift syrinxxGift "/* your subgift message */).catch(err => {
-                    console.log(err);
+                if (typeof(settings.subgiftmessage[channel.substring(1)]) != "undefined"){
+                    var string = settings.subgiftmessage[channel.substring(1)].replace(/%username%/g, username).replace(/%recipient%/g, recipient);
+                }else if(typeof(settings.subgiftmessage.default) != "undefined"){
+                    var string = settings.subgiftmessage.default.replace(/%username%/g, username).replace(/%recipient%/g, recipient);
+                }else {
+                    return;
+                }
+                client.say(channel, string).catch(err => {
+                    logger.error(err);
                 });
             }
         }
     });
 
     /*client.on("submysterygift", function(channel, username, method, userstate, message) {
-        console.log("");
-        console.log("");
-        console.log(message);
-        console.log("");
-        console.log("");
+        logger.info("");
+        logger.info("");
+        logger.info(message);
+        logger.info("");
+        logger.info("");
     });*/
 
     client.on("otherthings", function(things, msgid) {
-        console.log("");
-        console.log("");
-        console.log("MSGID: " + msgid);
-        console.log("");
-        console.log(things);
-        console.log("");
-        console.log("");
+        logger.info("");
+        logger.info("");
+        logger.info("MSGID: " + msgid);
+        logger.info("");
+        logger.info(things);
+        logger.info("");
+        logger.info("");
     });
 
     // Cheer Event
@@ -168,8 +193,8 @@ awaitLoginToken().then(function (loginData){
 function awaitLoginToken(username, password) {
     return new Promise(function(resolve, reject) {
         var server = app.listen(port, function () {
-            console.log('WebServer started for auth');
-            console.log('Login here: http://localhost:' + port + '/auth.html');
+            logger.info('WebServer started for auth');
+            logger.info('Login here: http://localhost:' + port + '/auth.html');
         });
         app.get('/callback/twitch/:token/:username', function(req, res){
             if(req.params.username && req.params.token){
