@@ -59,7 +59,7 @@ awaitLoginToken().then(function (loginData){
         },
         identity: {
             username: loginData.username, 
-            password: "oauth:" + loginData.token //Your twitch OAuth token you can get it here: https://twitchapps.com/tmi/ (e.g. oauth:30randomnumbersorchars12313278)
+            password: "oauth:" + loginData.token
         },
         channels: settings.channels
     };
