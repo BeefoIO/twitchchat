@@ -9,7 +9,11 @@ var cors = require('cors');
 var app = express();
 var assets = express();
 var fs = require('fs');
-
+if(!fs.existsSync('./settings.json')) {
+    logger.fatal('You need to create a settings.json.');
+    logger.fatal('There is an example at: settings_example.json');
+    process.exit(0);
+}
 var settings = fs.readFileSync('./settings.json', 'utf8');
 var settings = JSON.parse(settings);
 
