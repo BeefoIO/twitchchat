@@ -10,8 +10,15 @@ var app = express();
 var assets = express();
 var fs = require('fs');
 if(!fs.existsSync('./settings.json')) {
-    logger.fatal('You need to create a settings.json.');
-    logger.fatal('There is an example at: settings_example.json');
+    if(!fs.existsSync('./settings_example.json')){
+        logger.fatal('You need to create a settings.json.');
+        logger.fatal('There is an example at: settings_example.json');
+        process.exit(0);
+    }
+    var settings_example = fs.readFileSync('./settings_example.json', 'utf8');
+    fs.writeFileSync('./settings.json', settings_example);
+    logger.fatal('We have copied the content of settings_example.json to settings.json');
+    logger.fatal('It will now stop and you can edit the settings.json to your preferences');
     process.exit(0);
 }
 var settings = fs.readFileSync('./settings.json', 'utf8');
