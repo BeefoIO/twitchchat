@@ -1,24 +1,84 @@
 {
   "name": "twitchchat",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "AutoChat for Twitch.TV",
   "main": "main.js",
+  "readme": "README.md",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "build && build -w portable",
+    "portable": "build -w portable",
+    "appx": "build -w appx",
+    "test": "standard --fix",
+    "lint": "standard",
+    "lint-fix": "standard --fix"
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.beefo.io/scm/pub/twitch_chat.git"
+    "url": "https://bitbucket.beefo.io/scm/pub/twitchchat.git"
   },
+  "bugs": {
+    "url": "https://beefo.io/"
+  },
+  "build": {
+    "appId": "beefo.io",
+    "productName": "AutoChat",
+    "copyright": "Copyright ©2018 BeefoIO",
+    "win": {
+      "target": "squirrel"
+    },
+    "squirrelWindows": {
+      "iconUrl": "https://static.realliferpg.de/img/launcher/icon.ico",
+      "loadingGif": "build/install-spinner.gif",
+      "remoteReleases": "https://static.realliferpg.de/remoteReleases/"
+    },
+    "portable": {
+      "requestExecutionLevel": "user"
+    },
+    "extraFiles": [
+      "settings.json",
+      "settings_example.json",
+      "public/*",
+      "public/fonts/*",
+      "assets/css/*",
+      "assets/img/*",
+      "assets/js/*"
+    ]
+  },
+  "contributors": [
+    {
+      "name": "Beefo",
+      "email": "gerbeefo@gmail.com",
+      "url": "https://github.com/GERBeefo"
+    }
+  ],
   "author": "Beefo",
-  "license": "ISC",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "devtron": "1.4.0",
+    "electron": "3.0.6",
+    "electron-builder": "^20.33.2",
+    "electron-builder-squirrel-windows": "^20.33.2",
+    "standard": "*"
+  },
   "dependencies": {
     "@beefoio/file.log": "^1.0.2",
+    "aws-sign2": "^0.7.0",
+    "caseless": "^0.12.0",
     "cors": "^2.8.4",
     "ejs": "^2.6.1",
-    "electron": "^3.0.6",
+    "electron-json-storage": "^2.1.0",
     "express": "^4.16.4",
+    "extend": "^3.0.2",
+    "forever-agent": "^0.6.1",
+    "form-data": "^2.3.3",
     "fs": "0.0.1-security",
-    "tmi.js": "^1.2.1"
+    "hawk": "^7.0.10",
+    "http-signature": "^1.2.0",
+    "is-typedarray": "^1.0.0",
+    "isstream": "^0.1.2",
+    "stringstream": "^1.0.0",
+    "tmi.js": "^1.2.1",
+    "tough-cookie": "^2.4.3"
   }
 }

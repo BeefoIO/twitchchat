@@ -1,30 +1,48 @@
-const electron = require('electron');
-const url = require('url');
-const path = require('path');
-const net = require('net');
-require('./service');
+const electron = require('electron')
+const url = require('url')
+const path = require('path')
+const net = require('net')
+require('./service')
 
-const {app, BrowserWindow, Menu, ipcMain} = electron;
+const { app, BrowserWindow, Menu, ipcMain, shell } = electron
 
-let mainWindow;
+let mainWindow
 
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'development'
 
-app.on('ready', function(){
-  mainWindow = createMainWindow();
+app.on('ready', function () {
+  mainWindow = createMainWindow()
 
-  const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-  //Menu.setApplicationMenu(mainMenu);
+  mainWindow.setMenu(null)
+  // Menu.setApplicationMenu(mainMenu);
 
-  //change window directly while updater not working
-  mainWindow.show();
-});
+  // change window directly while updater not working
+  mainWindow.show()
+})
 
 app.on('window-all-closed', () => {
   app.quit()
-});
+})
 
-function changeWindow(file){
+app.setUserTasks([
+  {
+    program: process.execPath,
+    arguments: '--open-website',
+    iconPath: process.execPath,
+    iconIndex: 0,
+    title: 'Website',
+    description: 'Developer Website'
+  }, {
+    program: process.execPath,
+    arguments: '--open-teamspeak',
+    iconPath: process.execPath,
+    iconIndex: 0,
+    title: 'Teamspeak',
+    description: 'Support Teamspeak'
+  }
+])
+
+function changeWindow (file) {
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'gui/', file, '.html'),
     protocol: 'file:',
@@ -32,7 +50,18 @@ function changeWindow(file){
   }))
 }
 
-ipcMain.on('settings:design:update', function(e, mainColorCode, secondColorCode, mainFontCode, titleFontCode){
+switch (process.argv[1]) {
+  case '--open-website':
+    shell.openExternal('https://beefo.io')
+    app.quit()
+    break
+  case '--open-teamspeak':
+    shell.openExternal('ts3server://thunderbolt')
+    app.quit()
+    break
+}
+
+/* ipcMain.on('settings:design:update', function(e, mainColorCode, secondColorCode, mainFontCode, titleFontCode){
   let json = '';
   json = JSON.stringify({ mainColor: mainColorCode, secondColor: secondColorCode, mainFont: mainFontCode, titleFont: titleFontCode });
   storage.set('json/settings.json', json, (err) => {
@@ -44,34 +73,24 @@ ipcMain.on('settings:design:update', function(e, mainColorCode, secondColorCode,
 });
 ipcMain.on('settings:send', function(e){
   mainWindow.webContents.send('settings:get', mainColor, secondColor, mainFont, titleFont);
-});
+}); */
 
-function createMainWindow() {
-  let mainWindow;
-  mainWindow = new BrowserWindow({frame: true, show: false});
+function createMainWindow () {
+  let mainWindow
+  mainWindow = new BrowserWindow({ frame: true, show: false, icon: 'resources/icon/appicon.ico' })
   mainWindow.loadURL(url.format({
-    pathname: /*path.join(__dirname, 'gui/lo.html')*/ 'localhost:6077/auth.html',
+    pathname: /* path.join(__dirname, 'gui/lo.html') */ 'localhost:6077/auth.html',
     protocol: 'http:',
     slashes: true
-  }));
+  }))
 
-  mainWindow.setMaxListeners(99999);
-  mainWindow.setResizable(false);
-  
-  return mainWindow;
-}
+  mainWindow.setMaxListeners(99999)
+  mainWindow.setResizable(false)
 
-function sendWindowStatus(status) {
-  updateWindow.webContents.send('status-update', status);
-}
-function sendDownloadStatus(downloadProgress) {
-  updateWindow.webContents.send('download-status', downloadProgress);
-}
-function sendUpdateError(error) {
-  updateWindow.webContents.send('update-error', error);
+  return mainWindow
 }
 
-const mainMenuTemplate = [
+/* const mainMenuTemplate = [
   {
     label: 'Menu',
     submenu: [
@@ -125,4 +144,4 @@ if(process.env.NODE_ENV !== 'production'){
       }
     ]
   })
-}
+} */

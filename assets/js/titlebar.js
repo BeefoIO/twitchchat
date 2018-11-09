@@ -1,25 +1,25 @@
-/*(function () {
+/* (function () {
 
     var electron = require('electron');
 
-    var remote = electron.remote; 
+    var remote = electron.remote;
 
-    function init() { 
+    function init() {
         document.getElementById("min-btn").addEventListener("click", function (e) {
             const window = remote.getCurrentWindow();
-            window.minimize(); 
+            window.minimize();
         });
-        
+
         document.getElementById("close-btn").addEventListener("click", function (e) {
             const window = remote.getCurrentWindow();
             window.close();
-        }); 
-    }; 
-      
+        });
+    };
+
     document.onreadystatechange = function () {
         if (document.readyState == "complete") {
-            init(); 
+            init();
         }
     };
 
-})();*/
+})(); */
