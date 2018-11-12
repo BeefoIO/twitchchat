@@ -1,5 +1,15 @@
 var tmi = require('./tmi.js/index')
-var logger = require('@beefoio/file.log')
+//var logger = require('@beefoio/file.log')
+var logger = {
+  trace: function(message) {},
+  debug: function(message) {},
+  info: function(message) {},
+  warn: function(message) {},
+  error: function(message) {},
+  fatal: function(message) {},
+  enableConsoleOutput: function() {},
+  setLevel: function(level) {}
+}
 logger.enableConsoleOutput()
 logger.setLevel('info')
 // var channelSubMessages = ['#BoostFuze', '#syrinxx1337', '#paaaaaaaaaaddy'];
@@ -31,13 +41,19 @@ app.use(express.static('public'))
 assets.use(express.static('assets'))
 app.set('view engine', 'ejs')
 app.set('views', './views')
+assets.set('view engine', 'ejs')
+assets.set('views', './views')
 var port = 6077
 var portAssets = 6078
 
 var assetsServer = assets.listen(portAssets, function () {
   logger.info('WebServer started for assets')
   logger.info('Assets are served here: http://localhost:' + portAssets + '/')
-})
+});
+
+assets.get('/appPath/:appPath', function(req, res) {
+  res.render('appPath', {appPath: Buffer.from(req.params.appPath, 'base64').toString('ascii')})
+});
 
 // every channel to lowercase
 channelSubMessages.forEach(channel => {
@@ -215,7 +231,7 @@ function awaitLoginToken (username, password) {
           token: req.params.token
         })
       } else {
-        res.render('no_user')
+        res.render('no_user');
       }
     })
   })

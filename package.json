@@ -1,5 +1,5 @@
 {
-  "name": "twitchchat",
+  "name": "autochat",
   "version": "1.1.0",
   "description": "AutoChat for Twitch.TV",
   "main": "main.js",
@@ -29,20 +29,21 @@
     },
     "squirrelWindows": {
       "iconUrl": "https://static.realliferpg.de/img/launcher/icon.ico",
-      "loadingGif": "build/install-spinner.gif",
-      "remoteReleases": "https://static.realliferpg.de/remoteReleases/"
+      "loadingGif": "build/install-spinner.gif"
     },
     "portable": {
       "requestExecutionLevel": "user"
     },
     "extraFiles": [
+      "log/debug.log",
       "settings.json",
       "settings_example.json",
       "public/*",
       "public/fonts/*",
       "assets/css/*",
       "assets/img/*",
-      "assets/js/*"
+      "assets/js/*",
+      "LICENSE"
     ]
   },
   "contributors": [
@@ -59,15 +60,18 @@
     "electron": "3.0.6",
     "electron-builder": "^20.33.2",
     "electron-builder-squirrel-windows": "^20.33.2",
+    "electron-packager": "^8.7.0",
+    "electron-winstaller": "^2.7.0",
     "standard": "*"
   },
   "dependencies": {
-    "@beefoio/file.log": "^1.0.2",
+    "@beefoio/file.log": "^1.0.3",
     "aws-sign2": "^0.7.0",
     "caseless": "^0.12.0",
     "cors": "^2.8.4",
     "ejs": "^2.6.1",
     "electron-json-storage": "^2.1.0",
+    "electron-squirrel-startup": "^1.0.0",
     "express": "^4.16.4",
     "extend": "^3.0.2",
     "forever-agent": "^0.6.1",
@@ -77,6 +81,7 @@
     "http-signature": "^1.2.0",
     "is-typedarray": "^1.0.0",
     "isstream": "^0.1.2",
+    "request": "^2.88.0",
     "stringstream": "^1.0.0",
     "tmi.js": "^1.2.1",
     "tough-cookie": "^2.4.3"
