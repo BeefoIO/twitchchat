@@ -1,6 +1,5 @@
 {
     "_comment": {
-        "": "Opens the directory of the settings.json at the start of the App",
         "submessage": {
             "channel": "here you can write your message. Use %username% for the subscribers username",
             "default": "the default message is the message that will be used if no message for the channel is defined and if channel message and default message is undefined there will be no message output"
@@ -20,7 +19,6 @@
         "channels": "The Channels that will be joined (all prefixed with a sharp(#))",
         "channelSubMessages": "The Channels where the sub messages will be written out"
     },
-    "openSettingsDirectory": true,
     "submessage": {
         "syrinxx1337": "syrinxxSub syrinxxSub syrinxxSub %username% syrinxxSub syrinxxSub syrinxxSub ", 
         "default": "syrinxxSub syrinxxSub syrinxxSub %username% syrinxxSub syrinxxSub syrinxxSub " 
