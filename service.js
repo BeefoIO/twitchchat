@@ -22,7 +22,8 @@ var fs = require('fs')
 if (!fs.existsSync('./settings.json')) {
   if (!fs.existsSync('./settings_example.json')) {
     logger.fatal('You need to create a settings.json.')
-    logger.fatal('There is an example at: settings_example.json')
+    logger.fatal('Normaly there is a settings_example.json but in your case there isn\'t. You may redownload from the git repository')
+    logger.fatal('Or you download it from my website');
     process.exit(0)
   }
   var settings_example = fs.readFileSync('./settings_example.json', 'utf8')

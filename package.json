@@ -28,8 +28,7 @@
       "target": "squirrel"
     },
     "squirrelWindows": {
-      "iconUrl": "https://static.realliferpg.de/img/launcher/icon.ico",
-      "loadingGif": "build/install-spinner.gif"
+      "iconUrl": "https://static.realliferpg.de/img/launcher/icon.ico"
     },
     "portable": {
       "requestExecutionLevel": "user"
@@ -39,6 +38,7 @@
       "settings.json",
       "settings_example.json",
       "public/*",
+      "views/*",
       "public/fonts/*",
       "assets/css/*",
       "assets/img/*",
@@ -81,6 +81,7 @@
     "http-signature": "^1.2.0",
     "is-typedarray": "^1.0.0",
     "isstream": "^0.1.2",
+    "open-in-editor": "^2.2.0",
     "request": "^2.88.0",
     "stringstream": "^1.0.0",
     "tmi.js": "^1.2.1",

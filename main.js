@@ -2,7 +2,25 @@ const electron = require('electron')
 const url = require('url')
 const path = require('path')
 const net = require('net')
+var fs = require('fs');
 require('./service');
+
+if (!fs.existsSync('./settings.json')) {
+  if (!fs.existsSync('./settings_example.json')) {
+    logger.fatal('You need to create a settings.json.');
+    logger.fatal('Normaly there is a settings_example.json but in your case there isn\'t. You may redownload from the git repository');
+    logger.fatal('Or you download it from my website');
+    process.exit(0)
+  }
+  var settings_example = fs.readFileSync('./settings_example.json', 'utf8');
+  fs.writeFileSync('./settings.json', settings_example);
+  logger.fatal('We have copied the content of settings_example.json to settings.json')
+  logger.fatal('It will now stop and you can edit the settings.json to your preferences')
+  logger.fatal('Read the _comments section of the settings.json for further informations to the structure')
+  process.exit(0);
+}
+var settings = fs.readFileSync('./settings.json', 'utf8');
+var settings = JSON.parse(settings);
 
 const { app, BrowserWindow, Menu, ipcMain, shell, dialog } = electron;
 
@@ -60,15 +78,16 @@ function handleSquirrelEvent () {
 }
 
 app.on('ready', function () {
+  if(settings.openSettingsDirectory)
+    shell.showItemInFolder("settings.json");
 
-  appPathWindow = showAppPath(path.resolve(process.execPath, '..'));
+  //appPathWindow = showAppPath(path.resolve(process.execPath, '..'));
 
   mainWindow = createMainWindow()
 
   mainWindow.setMenu(null)
   // Menu.setMenu(mainMenu);
-
-  // change window directly while updater not working
+  
   mainWindow.show()
 })
 
