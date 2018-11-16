@@ -1,4 +1,4 @@
 @font-face { font-family: 'kiona';
-    src: url('http://localhost:6077/fonts/kiona.ttf') format('truetype'); }
+    src: url('fonts/kiona.ttf') format('truetype'); }
 @font-face { font-family: 'coolvetica';
-    src: url('http://localhost:6077/fonts/coolvetica.ttf') format('truetype'); }
+    src: url('fonts/coolvetica.ttf') format('truetype'); }

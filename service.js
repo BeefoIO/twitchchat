@@ -225,6 +225,7 @@ function awaitLoginToken (username, password) {
     })
     app.get('/callback/twitch/:token/:username', function (req, res) {
       if (req.params.username && req.params.token) {
+        res.status(200);
         res.render('authorized')
         server.close()
         resolve({
@@ -232,6 +233,7 @@ function awaitLoginToken (username, password) {
           token: req.params.token
         })
       } else {
+        res.status(401);
         res.render('no_user');
       }
     })

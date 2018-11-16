@@ -22,7 +22,7 @@ if (!fs.existsSync('./settings.json')) {
 var settings = fs.readFileSync('./settings.json', 'utf8');
 var settings = JSON.parse(settings);
 
-const { app, BrowserWindow, Menu, ipcMain, shell, dialog } = electron;
+const { app, BrowserWindow, Menu, ipcMain, shell, dialog, autoUpdater } = electron;
 
 let mainWindow
 
@@ -83,10 +83,12 @@ app.on('ready', function () {
 
   //appPathWindow = showAppPath(path.resolve(process.execPath, '..'));
 
+  mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+
   mainWindow = createMainWindow()
 
-  mainWindow.setMenu(null)
-  // Menu.setMenu(mainMenu);
+  mainWindow.setMenu(mainMenu)
+  //mainWindow.setMenu(mainMenu);
   
   mainWindow.show()
 })
@@ -102,7 +104,7 @@ app.setUserTasks([
     iconPath: process.execPath,
     iconIndex: 0,
     title: 'Website',
-    description: 'Developer Website'
+    description: 'Developer\'s Website'
   }, {
     program: process.execPath,
     arguments: '--open-teamspeak',
@@ -113,6 +115,27 @@ app.setUserTasks([
   }
 ])
 
+autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+  win.webContents.send('update-downloaded', {
+    releaseNotes: releaseNotes,
+    releaseName: releaseName,
+    releaseDate: releaseDate,
+    updateURL: updateURL
+  })
+})
+
+autoUpdater.addListener('checking-for-update', () => {
+  win.webContents.send('checking-for-update')
+})
+
+autoUpdater.addListener('update-not-available', () => {
+  win.webContents.send('update-not-available')
+})
+
+autoUpdater.addListener('update-available', () => {
+  win.webContents.send('update-available')
+})
+
 function changeWindow (file) {
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'gui/', file, '.html'),
@@ -120,6 +143,9 @@ function changeWindow (file) {
     slashes: true
   }))
 }
+
+autoUpdater.setFeedURL('http://deploy.beefo.io/autochat/win64')
+autoUpdater.checkForUpdates()
 
 switch (process.argv[1]) {
   case '--open-website':
@@ -176,7 +202,7 @@ function showAppPath (appPath) {
   return mainWindow
 }
 
-/* const mainMenuTemplate = [
+const mainMenuTemplate = [
   {
     label: 'Menu',
     submenu: [
@@ -230,4 +256,4 @@ if(process.env.NODE_ENV !== 'production'){
       }
     ]
   })
-} */
+}
