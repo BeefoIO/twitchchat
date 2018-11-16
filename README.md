@@ -9,6 +9,9 @@ All channels with a '#' before the channel name
 npm install 
 ```
 
+or if you want the program:
+[Installation-Wiki](https://git.beefo.io/Beefo/twitchchat/wiki/Installation)
+
 ## Planed
 
 I have planed to build a gui with multiple settings. 
