@@ -83,11 +83,11 @@ app.on('ready', function () {
 
   //appPathWindow = showAppPath(path.resolve(process.execPath, '..'));
 
-  mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+  //mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
 
   mainWindow = createMainWindow()
 
-  mainWindow.setMenu(mainMenu)
+  mainWindow.setMenu(null)
   //mainWindow.setMenu(mainMenu);
   
   mainWindow.show()
@@ -116,24 +116,24 @@ app.setUserTasks([
 ])
 
 autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
-  win.webContents.send('update-downloaded', {
+  /*win.webContents.send('update-downloaded', {
     releaseNotes: releaseNotes,
     releaseName: releaseName,
     releaseDate: releaseDate,
     updateURL: updateURL
-  })
+  })*/
 })
 
 autoUpdater.addListener('checking-for-update', () => {
-  win.webContents.send('checking-for-update')
+  //win.webContents.send('checking-for-update')
 })
 
 autoUpdater.addListener('update-not-available', () => {
-  win.webContents.send('update-not-available')
+  //win.webContents.send('update-not-available')
 })
 
 autoUpdater.addListener('update-available', () => {
-  win.webContents.send('update-available')
+  //win.webContents.send('update-available')
 })
 
 function changeWindow (file) {
