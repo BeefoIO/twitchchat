@@ -56,6 +56,10 @@ assets.get('/appPath/:appPath', function(req, res) {
   res.render('appPath', {appPath: Buffer.from(req.params.appPath, 'base64').toString('ascii')})
 });
 
+assets.get('/message/:message', function(req, res) {
+  res.render('message', {message: Buffer.from(req.params.message, 'base64').toString('ascii')})
+});
+
 // every channel to lowercase
 channelSubMessages.forEach(channel => {
   channelSubMessages.push(channel.toLocaleLowerCase())

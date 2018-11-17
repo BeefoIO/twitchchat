@@ -122,6 +122,7 @@ autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, 
     releaseDate: releaseDate,
     updateURL: updateURL
   })*/
+  autoUpdater.quitAndInstall();
 })
 
 autoUpdater.addListener('checking-for-update', () => {
@@ -143,6 +144,9 @@ function changeWindow (file) {
     slashes: true
   }))
 }
+
+autoUpdater.addListener('error', (err) => { // eslint-disable-line
+})
 
 autoUpdater.setFeedURL('http://deploy.beefo.io/autochat/win64')
 autoUpdater.checkForUpdates()
@@ -177,6 +181,21 @@ function createMainWindow () {
   mainWindow = new BrowserWindow({ frame: true, show: false, icon: 'resources/icon/appicon.ico' })
   mainWindow.loadURL(url.format({
     pathname: /* path.join(__dirname, 'gui/lo.html') */ 'localhost:6077/auth.html',
+    protocol: 'http:',
+    slashes: true
+  }))
+
+  mainWindow.setMaxListeners(99999)
+  mainWindow.setResizable(false)
+
+  return mainWindow
+}
+
+function showMessage (message) {
+  let mainWindow
+  mainWindow = new BrowserWindow({ frame: true, show: true, icon: 'resources/icon/appicon.ico' })
+  mainWindow.loadURL(url.format({
+    pathname: /* path.join(__dirname, 'gui/lo.html') */ 'localhost:6078/message/' + Buffer.from(message).toString('base64'),
     protocol: 'http:',
     slashes: true
   }))
