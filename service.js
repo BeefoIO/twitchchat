@@ -131,7 +131,7 @@ awaitLoginToken().then(function (loginData) {
   client.on('subgift', function (channel, username, recipient, method, subMysteryGiftBool, userstate, message) {
     logger.debug(JSON.stringify(message))
     if (subMysteryGiftBool) {
-      counter = recipient + 1
+      counter = counter + recipient + 1
       counterRun = 0
       logger.info('submysterygift event triggered')
       if (username.toLowerCase() !== options.identity.username.toLowerCase() && channelSubMessages.includes(channel)) {
