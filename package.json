@@ -7,6 +7,7 @@
   "scripts": {
     "start": "electron .",
     "dist": "build && build -w portable",
+    "pack:osx": "./node_modules/.bin/electron-packager . $npm_package_productName --app-version=$npm_package_version --version=0.36.7 --out=builds --ignore='^/builds$' --platform=darwin --arch=x64 --sign='Developer ID Application: My Company Ltd (ABCDEFGH10)' --icon=icon.icns --overwrite",
     "portable": "build -w portable",
     "appx": "build -w appx",
     "test": "standard --fix",
