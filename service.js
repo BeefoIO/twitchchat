@@ -132,11 +132,11 @@ awaitLoginToken().then(function (loginData) {
     if (subMysteryGiftBool){
       if(typeof counter != "undefined" && counter != null){
         console.log("test");
-        counter = counter + recipient + 1;
+        counter = counter + recipient;
 		counterRun = counterRun;
       }else{
-        counter = recipient + 1
-		counterRun = 0
+        counter = recipient;
+		counterRun = 0;
       }
       logger.info('submysterygift event triggered')
       if (username.toLowerCase() !== options.identity.username.toLowerCase() && channelSubMessages.includes(channel)) {
