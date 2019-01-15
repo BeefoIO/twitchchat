@@ -10,7 +10,7 @@ npm install
 ```
 
 or if you want the program:
-[Installation-Wiki](https://git.beefo.io/Beefo/twitchchat/wiki/Installation)
+[Installation-Wiki](https://github.com/BeefoIO/twitchchat/wiki/Installation)
 
 ## Planed
 
