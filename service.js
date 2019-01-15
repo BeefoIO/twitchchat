@@ -1,6 +1,6 @@
 var tmi = require('./tmi.js/index')
-//var logger = require('@beefoio/file.log')
-var logger = {
+var logger = require('@beefoio/file.log')
+/*var logger = {
   trace: function(message) {},
   debug: function(message) {},
   info: function(message) {},
@@ -9,7 +9,7 @@ var logger = {
   fatal: function(message) {},
   enableConsoleOutput: function() {},
   setLevel: function(level) {}
-}
+}*/
 logger.enableConsoleOutput()
 logger.setLevel('info')
 // var channelSubMessages = ['#BoostFuze', '#syrinxx1337', '#paaaaaaaaaaddy'];
@@ -130,14 +130,7 @@ awaitLoginToken().then(function (loginData) {
   // SubGift Event
   client.on('subgift', function (channel, username, recipient, method, subMysteryGiftBool, userstate, message) {
     if (subMysteryGiftBool){
-      if(typeof counter != "undefined" && counter != null){
-        console.log("test");
-        counter = counter + recipient;
-		counterRun = counterRun;
-      }else{
-        counter = recipient;
-		counterRun = 0;
-      }
+      counter = recipient + 1;
       logger.info('submysterygift event triggered')
       if (username.toLowerCase() !== options.identity.username.toLowerCase() && channelSubMessages.includes(channel)) {
         if (recipient !== true) {
@@ -165,7 +158,7 @@ awaitLoginToken().then(function (loginData) {
         }
       }
       return
-    } else if (!subMysteryGiftBool && typeof (counterRun) !== 'undefined') {
+    } else if (!subMysteryGiftBool && typeof (counterRun) == 'undefined') {
       counter = 0
       counterRun = 0
     }

@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.beefo.io/scm/pub/twitchchat.git"
+    "url": "https://github.com/BeefoIO/twitchchat.git"
   },
   "bugs": {
     "url": "https://beefo.io/"
@@ -49,9 +49,9 @@
   },
   "contributors": [
     {
-      "name": "Beefo",
-      "email": "gerbeefo@gmail.com",
-      "url": "https://github.com/GERBeefo"
+      "name": "Benjamin Grziwok",
+      "email": "admin@benjamingrziwok.com",
+      "url": "https://github.com/BeefoIO"
     }
   ],
   "author": "Beefo",
